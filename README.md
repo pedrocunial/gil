@@ -1,7 +1,7 @@
 # gil
 
 
-Linguagem de programacao sem objetos e com palavras chaves simplificadas e tipagem fraca.
+Linguagem de programacao sem objetos, com palavras chaves simplificadas e tipagem fraca.
 
 ### Palavras chaves:
 
