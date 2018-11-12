@@ -1,0 +1,421 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CLOSE_BRACKET
+    COMMENT
+    ELSE
+    EQ
+    GT
+    IF
+    LOOP
+    LT
+    OPEN_BRACKET
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> expression PLUS term
+Rule 2     expression -> expression MINUS term
+Rule 3     expression -> term
+Rule 4     term -> term MULT factor
+Rule 5     term -> term DIV factor
+Rule 6     term -> factor
+Rule 7     factor -> NUMBER
+Rule 8     factor -> ID
+Rule 9     factor -> PLUS expression
+Rule 10    factor -> MINUS expression
+Rule 11    factor -> OPEN_PARENT expression CLOSE_PARENT
+Rule 12    assign -> ID ASSIGNER expression
+
+Terminals, with rules where they appear
+
+ASSIGNER             : 12
+CLOSE_BRACKET        : 
+CLOSE_PARENT         : 11
+COMMENT              : 
+DIV                  : 5
+ELSE                 : 
+EQ                   : 
+GT                   : 
+ID                   : 8 12
+IF                   : 
+LOOP                 : 
+LT                   : 
+MINUS                : 2 10
+MULT                 : 4
+NUMBER               : 7
+OPEN_BRACKET         : 
+OPEN_PARENT          : 11
+PLUS                 : 1 9
+error                : 
+
+Nonterminals, with rules where they appear
+
+assign               : 
+expression           : 1 2 9 10 11 12 0
+factor               : 4 5 6
+term                 : 1 2 3 4 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . term
+    (4) term -> . term MULT factor
+    (5) term -> . term DIV factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    expression                     shift and go to state 1
+    term                           shift and go to state 3
+    factor                         shift and go to state 5
+
+state 1
+
+    (0) S' -> expression .
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+
+
+state 2
+
+    (9) factor -> PLUS . expression
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . term
+    (4) term -> . term MULT factor
+    (5) term -> . term DIV factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    expression                     shift and go to state 11
+    term                           shift and go to state 3
+    factor                         shift and go to state 5
+
+state 3
+
+    (3) expression -> term .
+    (4) term -> term . MULT factor
+    (5) term -> term . DIV factor
+
+  ! shift/reduce conflict for MULT resolved as shift
+  ! shift/reduce conflict for DIV resolved as shift
+    PLUS            reduce using rule 3 (expression -> term .)
+    MINUS           reduce using rule 3 (expression -> term .)
+    $end            reduce using rule 3 (expression -> term .)
+    CLOSE_PARENT    reduce using rule 3 (expression -> term .)
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+  ! MULT            [ reduce using rule 3 (expression -> term .) ]
+  ! DIV             [ reduce using rule 3 (expression -> term .) ]
+
+
+state 4
+
+    (10) factor -> MINUS . expression
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . term
+    (4) term -> . term MULT factor
+    (5) term -> . term DIV factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    expression                     shift and go to state 14
+    term                           shift and go to state 3
+    factor                         shift and go to state 5
+
+state 5
+
+    (6) term -> factor .
+
+    MULT            reduce using rule 6 (term -> factor .)
+    DIV             reduce using rule 6 (term -> factor .)
+    PLUS            reduce using rule 6 (term -> factor .)
+    MINUS           reduce using rule 6 (term -> factor .)
+    $end            reduce using rule 6 (term -> factor .)
+    CLOSE_PARENT    reduce using rule 6 (term -> factor .)
+
+
+state 6
+
+    (7) factor -> NUMBER .
+
+    MULT            reduce using rule 7 (factor -> NUMBER .)
+    DIV             reduce using rule 7 (factor -> NUMBER .)
+    PLUS            reduce using rule 7 (factor -> NUMBER .)
+    MINUS           reduce using rule 7 (factor -> NUMBER .)
+    $end            reduce using rule 7 (factor -> NUMBER .)
+    CLOSE_PARENT    reduce using rule 7 (factor -> NUMBER .)
+
+
+state 7
+
+    (8) factor -> ID .
+
+    MULT            reduce using rule 8 (factor -> ID .)
+    DIV             reduce using rule 8 (factor -> ID .)
+    PLUS            reduce using rule 8 (factor -> ID .)
+    MINUS           reduce using rule 8 (factor -> ID .)
+    $end            reduce using rule 8 (factor -> ID .)
+    CLOSE_PARENT    reduce using rule 8 (factor -> ID .)
+
+
+state 8
+
+    (11) factor -> OPEN_PARENT . expression CLOSE_PARENT
+    (1) expression -> . expression PLUS term
+    (2) expression -> . expression MINUS term
+    (3) expression -> . term
+    (4) term -> . term MULT factor
+    (5) term -> . term DIV factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    expression                     shift and go to state 15
+    term                           shift and go to state 3
+    factor                         shift and go to state 5
+
+state 9
+
+    (1) expression -> expression PLUS . term
+    (4) term -> . term MULT factor
+    (5) term -> . term DIV factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    term                           shift and go to state 16
+    factor                         shift and go to state 5
+
+state 10
+
+    (2) expression -> expression MINUS . term
+    (4) term -> . term MULT factor
+    (5) term -> . term DIV factor
+    (6) term -> . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    term                           shift and go to state 17
+    factor                         shift and go to state 5
+
+state 11
+
+    (9) factor -> PLUS expression .
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+
+    MULT            reduce using rule 9 (factor -> PLUS expression .)
+    DIV             reduce using rule 9 (factor -> PLUS expression .)
+    PLUS            reduce using rule 9 (factor -> PLUS expression .)
+    MINUS           reduce using rule 9 (factor -> PLUS expression .)
+    $end            reduce using rule 9 (factor -> PLUS expression .)
+    CLOSE_PARENT    reduce using rule 9 (factor -> PLUS expression .)
+
+  ! PLUS            [ shift and go to state 9 ]
+  ! MINUS           [ shift and go to state 10 ]
+
+
+state 12
+
+    (4) term -> term MULT . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    factor                         shift and go to state 18
+
+state 13
+
+    (5) term -> term DIV . factor
+    (7) factor -> . NUMBER
+    (8) factor -> . ID
+    (9) factor -> . PLUS expression
+    (10) factor -> . MINUS expression
+    (11) factor -> . OPEN_PARENT expression CLOSE_PARENT
+
+    NUMBER          shift and go to state 6
+    ID              shift and go to state 7
+    PLUS            shift and go to state 2
+    MINUS           shift and go to state 4
+    OPEN_PARENT     shift and go to state 8
+
+    factor                         shift and go to state 19
+
+state 14
+
+    (10) factor -> MINUS expression .
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+
+    MULT            reduce using rule 10 (factor -> MINUS expression .)
+    DIV             reduce using rule 10 (factor -> MINUS expression .)
+    PLUS            reduce using rule 10 (factor -> MINUS expression .)
+    MINUS           reduce using rule 10 (factor -> MINUS expression .)
+    $end            reduce using rule 10 (factor -> MINUS expression .)
+    CLOSE_PARENT    reduce using rule 10 (factor -> MINUS expression .)
+
+  ! PLUS            [ shift and go to state 9 ]
+  ! MINUS           [ shift and go to state 10 ]
+
+
+state 15
+
+    (11) factor -> OPEN_PARENT expression . CLOSE_PARENT
+    (1) expression -> expression . PLUS term
+    (2) expression -> expression . MINUS term
+
+    CLOSE_PARENT    shift and go to state 20
+    PLUS            shift and go to state 9
+    MINUS           shift and go to state 10
+
+
+state 16
+
+    (1) expression -> expression PLUS term .
+    (4) term -> term . MULT factor
+    (5) term -> term . DIV factor
+
+    PLUS            reduce using rule 1 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 1 (expression -> expression PLUS term .)
+    $end            reduce using rule 1 (expression -> expression PLUS term .)
+    CLOSE_PARENT    reduce using rule 1 (expression -> expression PLUS term .)
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+  ! MULT            [ reduce using rule 1 (expression -> expression PLUS term .) ]
+  ! DIV             [ reduce using rule 1 (expression -> expression PLUS term .) ]
+
+
+state 17
+
+    (2) expression -> expression MINUS term .
+    (4) term -> term . MULT factor
+    (5) term -> term . DIV factor
+
+    PLUS            reduce using rule 2 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 2 (expression -> expression MINUS term .)
+    $end            reduce using rule 2 (expression -> expression MINUS term .)
+    CLOSE_PARENT    reduce using rule 2 (expression -> expression MINUS term .)
+    MULT            shift and go to state 12
+    DIV             shift and go to state 13
+
+  ! MULT            [ reduce using rule 2 (expression -> expression MINUS term .) ]
+  ! DIV             [ reduce using rule 2 (expression -> expression MINUS term .) ]
+
+
+state 18
+
+    (4) term -> term MULT factor .
+
+    MULT            reduce using rule 4 (term -> term MULT factor .)
+    DIV             reduce using rule 4 (term -> term MULT factor .)
+    PLUS            reduce using rule 4 (term -> term MULT factor .)
+    MINUS           reduce using rule 4 (term -> term MULT factor .)
+    $end            reduce using rule 4 (term -> term MULT factor .)
+    CLOSE_PARENT    reduce using rule 4 (term -> term MULT factor .)
+
+
+state 19
+
+    (5) term -> term DIV factor .
+
+    MULT            reduce using rule 5 (term -> term DIV factor .)
+    DIV             reduce using rule 5 (term -> term DIV factor .)
+    PLUS            reduce using rule 5 (term -> term DIV factor .)
+    MINUS           reduce using rule 5 (term -> term DIV factor .)
+    $end            reduce using rule 5 (term -> term DIV factor .)
+    CLOSE_PARENT    reduce using rule 5 (term -> term DIV factor .)
+
+
+state 20
+
+    (11) factor -> OPEN_PARENT expression CLOSE_PARENT .
+
+    MULT            reduce using rule 11 (factor -> OPEN_PARENT expression CLOSE_PARENT .)
+    DIV             reduce using rule 11 (factor -> OPEN_PARENT expression CLOSE_PARENT .)
+    PLUS            reduce using rule 11 (factor -> OPEN_PARENT expression CLOSE_PARENT .)
+    MINUS           reduce using rule 11 (factor -> OPEN_PARENT expression CLOSE_PARENT .)
+    $end            reduce using rule 11 (factor -> OPEN_PARENT expression CLOSE_PARENT .)
+    CLOSE_PARENT    reduce using rule 11 (factor -> OPEN_PARENT expression CLOSE_PARENT .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for MULT in state 3 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 3 resolved as shift

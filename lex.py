@@ -1,7 +1,13 @@
 import ply.lex as lex
 
 
-tokens = (
+reserved = {
+    'i': 'IF',
+    'e': 'ELSE',
+    'l': 'LOOP'
+}
+
+tokens = [
     'NUMBER',
     'PLUS',
     'MINUS',
@@ -9,7 +15,15 @@ tokens = (
     'DIV',
     'OPEN_PARENT',
     'CLOSE_PARENT',
-)
+    'OPEN_BRACKET',
+    'CLOSE_BRACKET',
+    'ID',
+    'COMMENT',
+    'ASSIGNER',
+    'EQ',
+    'LT',
+    'GT'
+] + list(reserved.values())
 
 t_PLUS = r'\+'
 t_MINUS = r'\-'
@@ -17,11 +31,28 @@ t_MULT = r'\*'
 t_DIV = r'\/'
 t_OPEN_PARENT = r'\('
 t_CLOSE_PARENT = r'\)'
+t_OPEN_BRACKET = r'\{'
+t_CLOSE_BRACKET = r'\}'
+t_ASSIGNER = r'\:='
+t_EQ = '\=='
+t_LT = '\<'
+t_GT = '\>'
 
 t_ignore = ' \t'  # ignorar espacos e tabs
 
 
 # a regex "no meio do nada" faz parte da sintaxe do ply
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value, 'ID')    # palavras reservadas
+    return t
+
+
+def t_COMMENT(t):
+    r'\#.*'
+    pass  # nao retornar implica em ignorar o token
+
+
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
@@ -39,4 +70,4 @@ def t_error(t):
     t.lexer.skip(1)
 
 
-lexer = lex.lex()
+lexer = lex.lex(optimize=1)
