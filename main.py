@@ -12,6 +12,17 @@ out y
 x := (9 + 4 * 10 + -20  *2)
 out x
 
+l x > y {
+y := y + 1
+out y
+}
+
+i ((y - x) == 0) {
+out 42
+} e {
+out 24
+}
+
 '''
 
 result = parser.parse(data)

@@ -5,9 +5,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftPLUSMINUSleftMULTDIVrightUPLUSUMINUSNUMBER PLUS MINUS MULT DIV OPEN_PARENT CLOSE_PARENT OPEN_BRACKET CLOSE_BRACKET ID COMMENT ASSIGNER EQ LT GT AND OR NOT IF ELSE LOOP PRINT INPUTstmts : stmt stmts\n             | emptystmt : assign\n            | outassign : ID ASSIGNER expressionout : PRINT expressionexpression : expression PLUS termexpression : expression MINUS termexpression : termterm : term MULT factorterm : term DIV factorterm : factorfactor : NUMBERfactor : IDfactor : INPUTfactor : PLUS expression %prec UPLUS\n              | MINUS expression %prec UMINUSfactor : OPEN_PARENT expression CLOSE_PARENTempty : '
+_lr_signature = 'leftPLUSMINUSleftMULTDIVrightUPLUSUMINUSNUMBER PLUS MINUS MULT DIV OPEN_PARENT CLOSE_PARENT OPEN_BRACKET CLOSE_BRACKET ID COMMENT ASSIGNER EQ LT GT AND OR NOT IF ELSE LOOP PRINT INPUTstmts : stmt stmts\n             | emptystmt : assign\n            | out\n            | if\n            | loopif : IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET\n          | IF relexp OPEN_BRACKET stmts CLOSE_BRACKETif : IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET\n          | IF error OPEN_BRACKET stmts CLOSE_BRACKETloop : LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKETloop : LOOP error OPEN_BRACKET stmts CLOSE_BRACKETassign : ID ASSIGNER relexpout : PRINT relexprelexp : expression\n              | relexp GT relexp\n              | relexp EQ relexp\n              | relexp LT relexpexpression : expression PLUS expressionexpression : expression OR relexpexpression : expression MINUS expressionexpression : termterm : term MULT expressionterm : term DIV expressionterm : term AND relexpterm : factorfactor : NUMBERfactor : IDfactor : INPUTfactor : PLUS expression %prec UPLUS\n              | MINUS expression %prec UMINUS\n              | NOT relexpfactor : OPEN_PARENT relexp CLOSE_PARENTempty : '
     
-_lr_action_items = {'$end':([0,1,2,3,4,5,8,10,12,14,15,16,17,19,22,25,27,28,29,30,31,],[-19,0,-19,-2,-3,-4,-1,-6,-9,-12,-13,-14,-15,-5,-16,-17,-7,-8,-10,-11,-18,]),'ID':([0,2,4,5,7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,29,30,31,],[6,6,-3,-4,16,16,-6,16,-9,16,-12,-13,-14,-15,16,-5,16,16,-16,16,16,-17,-7,-8,-10,-11,-18,]),'PRINT':([0,2,4,5,10,12,14,15,16,17,19,22,25,27,28,29,30,31,],[7,7,-3,-4,-6,-9,-12,-13,-14,-15,-5,-16,-17,-7,-8,-10,-11,-18,]),'ASSIGNER':([6,],[9,]),'NUMBER':([7,9,11,13,18,20,21,23,24,],[15,15,15,15,15,15,15,15,15,]),'INPUT':([7,9,11,13,18,20,21,23,24,],[17,17,17,17,17,17,17,17,17,]),'PLUS':([7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,],[11,11,20,11,-9,11,-12,-13,-14,-15,11,20,11,11,-16,11,11,-17,20,-7,-8,-10,-11,-18,]),'MINUS':([7,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,],[13,13,21,13,-9,13,-12,-13,-14,-15,13,21,13,13,-16,13,13,-17,21,-7,-8,-10,-11,-18,]),'OPEN_PARENT':([7,9,11,13,18,20,21,23,24,],[18,18,18,18,18,18,18,18,18,]),'MULT':([12,14,15,16,17,22,25,27,28,29,30,31,],[23,-12,-13,-14,-15,-16,-17,23,23,-10,-11,-18,]),'DIV':([12,14,15,16,17,22,25,27,28,29,30,31,],[24,-12,-13,-14,-15,-16,-17,24,24,-10,-11,-18,]),'CLOSE_PARENT':([12,14,15,16,17,22,25,26,27,28,29,30,31,],[-9,-12,-13,-14,-15,-16,-17,31,-7,-8,-10,-11,-18,]),}
+_lr_action_items = {'$end':([0,1,2,3,4,5,6,7,12,14,15,18,19,20,21,22,29,36,37,41,47,48,49,50,51,52,53,54,55,56,61,62,63,64,71,72,],[-34,0,-34,-2,-3,-4,-5,-6,-1,-14,-15,-22,-26,-27,-28,-29,-13,-30,-31,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,-8,-10,-11,-12,-7,-9,]),'ID':([0,2,4,5,6,7,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,61,62,63,64,67,68,71,72,],[8,8,-3,-4,-5,-6,21,21,21,21,-14,-15,21,21,-22,-26,-27,-28,-29,21,21,-13,21,21,21,21,21,21,-30,-31,21,21,21,-32,8,8,8,8,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,-8,-10,-11,-12,8,8,-7,-9,]),'PRINT':([0,2,4,5,6,7,14,15,18,19,20,21,22,29,36,37,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,61,62,63,64,67,68,71,72,],[9,9,-3,-4,-5,-6,-14,-15,-22,-26,-27,-28,-29,-13,-30,-31,-32,9,9,9,9,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,-8,-10,-11,-12,9,9,-7,-9,]),'IF':([0,2,4,5,6,7,14,15,18,19,20,21,22,29,36,37,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,61,62,63,64,67,68,71,72,],[10,10,-3,-4,-5,-6,-14,-15,-22,-26,-27,-28,-29,-13,-30,-31,-32,10,10,10,10,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,-8,-10,-11,-12,10,10,-7,-9,]),'LOOP':([0,2,4,5,6,7,14,15,18,19,20,21,22,29,36,37,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,61,62,63,64,67,68,71,72,],[11,11,-3,-4,-5,-6,-14,-15,-22,-26,-27,-28,-29,-13,-30,-31,-32,11,11,11,11,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,-8,-10,-11,-12,11,11,-7,-9,]),'CLOSE_BRACKET':([2,3,4,5,6,7,12,14,15,18,19,20,21,22,29,36,37,41,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,67,68,69,70,71,72,],[-34,-2,-3,-4,-5,-6,-1,-14,-15,-22,-26,-27,-28,-29,-13,-30,-31,-32,-34,-34,-34,-34,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,61,62,63,64,-8,-10,-11,-12,-34,-34,71,72,-7,-9,]),'ASSIGNER':([8,],[13,]),'NUMBER':([9,10,11,13,16,17,23,24,30,31,32,33,34,35,38,39,40,],[20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,]),'INPUT':([9,10,11,13,16,17,23,24,30,31,32,33,34,35,38,39,40,],[22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,]),'PLUS':([9,10,11,13,15,16,17,18,19,20,21,22,23,24,30,31,32,33,34,35,36,37,38,39,40,41,47,48,49,50,51,52,53,54,55,56,],[16,16,16,16,33,16,16,-22,-26,-27,-28,-29,16,16,16,16,16,16,16,16,-30,-31,16,16,16,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,]),'MINUS':([9,10,11,13,15,16,17,18,19,20,21,22,23,24,30,31,32,33,34,35,36,37,38,39,40,41,47,48,49,50,51,52,53,54,55,56,],[17,17,17,17,35,17,17,-22,-26,-27,-28,-29,17,17,17,17,17,17,17,17,-30,-31,17,17,17,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,]),'NOT':([9,10,11,13,16,17,23,24,30,31,32,33,34,35,38,39,40,],[23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,]),'OPEN_PARENT':([9,10,11,13,16,17,23,24,30,31,32,33,34,35,38,39,40,],[24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,]),'error':([10,11,],[26,28,]),'GT':([14,15,18,19,20,21,22,25,27,29,36,37,41,42,47,48,49,50,51,52,53,54,55,56,],[30,-15,-22,-26,-27,-28,-29,30,30,30,-30,-31,30,30,30,30,30,-19,30,-21,-23,-24,30,-33,]),'EQ':([14,15,18,19,20,21,22,25,27,29,36,37,41,42,47,48,49,50,51,52,53,54,55,56,],[31,-15,-22,-26,-27,-28,-29,31,31,31,-30,-31,31,31,31,31,31,-19,31,-21,-23,-24,31,-33,]),'LT':([14,15,18,19,20,21,22,25,27,29,36,37,41,42,47,48,49,50,51,52,53,54,55,56,],[32,-15,-22,-26,-27,-28,-29,32,32,32,-30,-31,32,32,32,32,32,-19,32,-21,-23,-24,32,-33,]),'OPEN_BRACKET':([15,18,19,20,21,22,25,26,27,28,36,37,41,47,48,49,50,51,52,53,54,55,56,65,66,],[-15,-22,-26,-27,-28,-29,43,44,45,46,-30,-31,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,67,68,]),'OR':([15,18,19,20,21,22,36,37,41,47,48,49,50,51,52,53,54,55,56,],[34,-22,-26,-27,-28,-29,-30,-31,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,]),'MULT':([15,18,19,20,21,22,36,37,41,47,48,49,50,51,52,53,54,55,56,],[-15,38,-26,-27,-28,-29,-30,-31,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,]),'DIV':([15,18,19,20,21,22,36,37,41,47,48,49,50,51,52,53,54,55,56,],[-15,39,-26,-27,-28,-29,-30,-31,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,]),'AND':([15,18,19,20,21,22,36,37,41,47,48,49,50,51,52,53,54,55,56,],[-15,40,-26,-27,-28,-29,-30,-31,-32,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,]),'CLOSE_PARENT':([15,18,19,20,21,22,36,37,41,42,47,48,49,50,51,52,53,54,55,56,],[-15,-22,-26,-27,-28,-29,-30,-31,-32,56,-16,-17,-18,-19,-20,-21,-23,-24,-25,-33,]),'ELSE':([61,62,],[65,66,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'stmts':([0,2,],[1,8,]),'stmt':([0,2,],[2,2,]),'empty':([0,2,],[3,3,]),'assign':([0,2,],[4,4,]),'out':([0,2,],[5,5,]),'expression':([7,9,11,13,18,],[10,19,22,25,26,]),'term':([7,9,11,13,18,20,21,],[12,12,12,12,12,27,28,]),'factor':([7,9,11,13,18,20,21,23,24,],[14,14,14,14,14,14,14,29,30,]),}
+_lr_goto_items = {'stmts':([0,2,43,44,45,46,67,68,],[1,12,57,58,59,60,69,70,]),'stmt':([0,2,43,44,45,46,67,68,],[2,2,2,2,2,2,2,2,]),'empty':([0,2,43,44,45,46,67,68,],[3,3,3,3,3,3,3,3,]),'assign':([0,2,43,44,45,46,67,68,],[4,4,4,4,4,4,4,4,]),'out':([0,2,43,44,45,46,67,68,],[5,5,5,5,5,5,5,5,]),'if':([0,2,43,44,45,46,67,68,],[6,6,6,6,6,6,6,6,]),'loop':([0,2,43,44,45,46,67,68,],[7,7,7,7,7,7,7,7,]),'relexp':([9,10,11,13,23,24,30,31,32,34,40,],[14,25,27,29,41,42,47,48,49,51,55,]),'expression':([9,10,11,13,16,17,23,24,30,31,32,33,34,35,38,39,40,],[15,15,15,15,36,37,15,15,15,15,15,50,15,52,53,54,15,]),'term':([9,10,11,13,16,17,23,24,30,31,32,33,34,35,38,39,40,],[18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,]),'factor':([9,10,11,13,16,17,23,24,30,31,32,33,34,35,38,39,40,],[19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -28,21 +28,36 @@ _lr_productions = [
   ("S' -> stmts","S'",1,None,None,None),
   ('stmts -> stmt stmts','stmts',2,'p_stmts','parser.py',18),
   ('stmts -> empty','stmts',1,'p_stmts','parser.py',19),
-  ('stmt -> assign','stmt',1,'p_stmt','parser.py',25),
-  ('stmt -> out','stmt',1,'p_stmt','parser.py',26),
-  ('assign -> ID ASSIGNER expression','assign',3,'p_assign','parser.py',31),
-  ('out -> PRINT expression','out',2,'p_out','parser.py',36),
-  ('expression -> expression PLUS term','expression',3,'p_expression_plus','parser.py',41),
-  ('expression -> expression MINUS term','expression',3,'p_expression_minus','parser.py',46),
-  ('expression -> term','expression',1,'p_expression_term','parser.py',51),
-  ('term -> term MULT factor','term',3,'p_term_times','parser.py',56),
-  ('term -> term DIV factor','term',3,'p_term_div','parser.py',61),
-  ('term -> factor','term',1,'p_term_factor','parser.py',66),
-  ('factor -> NUMBER','factor',1,'p_factor_num','parser.py',71),
-  ('factor -> ID','factor',1,'p_factor_id','parser.py',76),
-  ('factor -> INPUT','factor',1,'p_factor_input','parser.py',81),
-  ('factor -> PLUS expression','factor',2,'p_factor_sign_num','parser.py',86),
-  ('factor -> MINUS expression','factor',2,'p_factor_sign_num','parser.py',87),
-  ('factor -> OPEN_PARENT expression CLOSE_PARENT','factor',3,'p_factor_expr','parser.py',92),
-  ('empty -> <empty>','empty',0,'p_empty','parser.py',97),
+  ('stmt -> assign','stmt',1,'p_stmt','parser.py',27),
+  ('stmt -> out','stmt',1,'p_stmt','parser.py',28),
+  ('stmt -> if','stmt',1,'p_stmt','parser.py',29),
+  ('stmt -> loop','stmt',1,'p_stmt','parser.py',30),
+  ('if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET','if',9,'p_if','parser.py',35),
+  ('if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET','if',5,'p_if','parser.py',36),
+  ('if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET','if',9,'p_if_error','parser.py',44),
+  ('if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET','if',5,'p_if_error','parser.py',45),
+  ('loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET','loop',5,'p_loop','parser.py',50),
+  ('loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET','loop',5,'p_loop_error','parser.py',55),
+  ('assign -> ID ASSIGNER relexp','assign',3,'p_assign','parser.py',60),
+  ('out -> PRINT relexp','out',2,'p_out','parser.py',65),
+  ('relexp -> expression','relexp',1,'p_relexp','parser.py',70),
+  ('relexp -> relexp GT relexp','relexp',3,'p_relexp','parser.py',71),
+  ('relexp -> relexp EQ relexp','relexp',3,'p_relexp','parser.py',72),
+  ('relexp -> relexp LT relexp','relexp',3,'p_relexp','parser.py',73),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_plus','parser.py',81),
+  ('expression -> expression OR relexp','expression',3,'p_expression_or','parser.py',86),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_minus','parser.py',91),
+  ('expression -> term','expression',1,'p_expression_term','parser.py',96),
+  ('term -> term MULT expression','term',3,'p_term_times','parser.py',101),
+  ('term -> term DIV expression','term',3,'p_term_div','parser.py',106),
+  ('term -> term AND relexp','term',3,'p_term_and','parser.py',111),
+  ('term -> factor','term',1,'p_term_factor','parser.py',116),
+  ('factor -> NUMBER','factor',1,'p_factor_num','parser.py',121),
+  ('factor -> ID','factor',1,'p_factor_id','parser.py',126),
+  ('factor -> INPUT','factor',1,'p_factor_input','parser.py',131),
+  ('factor -> PLUS expression','factor',2,'p_factor_sign_num','parser.py',136),
+  ('factor -> MINUS expression','factor',2,'p_factor_sign_num','parser.py',137),
+  ('factor -> NOT relexp','factor',2,'p_factor_sign_num','parser.py',138),
+  ('factor -> OPEN_PARENT relexp CLOSE_PARENT','factor',3,'p_factor_expr','parser.py',143),
+  ('empty -> <empty>','empty',0,'p_empty','parser.py',148),
 ]
