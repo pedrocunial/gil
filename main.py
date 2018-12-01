@@ -23,6 +23,14 @@ out 42
 out 24
 }
 
+f double(value) {
+double := value * 2
+}
+
+value := 2
+out double(value)
+out value
+
 '''
 
 result = parser.parse(data)

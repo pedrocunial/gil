@@ -27,8 +27,34 @@ def p_stmt(p):
     '''stmt : assign
             | out
             | if
-            | loop'''
+            | loop
+            | funcdec'''
     p[0] = p[1]
+
+
+# took params idea from:
+# https://github.com/dabeaz/ply/blob/master/example/GardenSnake/GardenSnake.py
+def p_funcdec(p):
+    '''funcdec : FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET'''
+    p[0] = nd.FuncDec(p[2], [p[3], p[5]])
+
+
+def p_params(p):
+    '''params : OPEN_PARENT args CLOSE_PARENT
+              | OPEN_PARENT CLOSE_PARENT'''
+    if len(p) == 3:
+        p[0] = []
+    else:
+        p[0] = p[2]
+
+
+def p_args(p):
+    '''args : args COMMA ID
+            | ID'''
+    if len(p) == 4:
+        p[0] = p[1] + p[3]
+    else:
+        p[0] = [p[1]]
 
 
 def p_if(p):
@@ -142,6 +168,29 @@ def p_factor_sign_num(p):
 def p_factor_expr(p):
     'factor : OPEN_PARENT relexp CLOSE_PARENT'
     p[0] = p[2]
+
+
+def p_factor_funccall(p):
+    'factor : ID callparams'
+    p[0] = nd.FuncCall(p[1], p[2])
+
+
+def p_callparams(p):
+    '''callparams : OPEN_PARENT callargs CLOSE_PARENT
+                  | OPEN_PARENT CLOSE_PARENT'''
+    if len(p) == 3:
+        p[0] = []
+    else:
+        p[0] = p[2]
+
+
+def p_callargs(p):
+    '''callargs : callargs COMMA relexp
+                | relexp'''
+    if len(p) == 2:
+        p[0] = [p[1]]
+    else:
+        p[0] = p[1] + p[3]
 
 
 def p_empty(p):

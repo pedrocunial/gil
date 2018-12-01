@@ -1,9 +1,5 @@
 Created by PLY version 3.10 (http://www.dabeaz.com/ply)
 
-Unused terminals:
-
-    COMMENT
-
 Grammar
 
 Rule 0     S' -> stmts
@@ -13,75 +9,92 @@ Rule 3     stmt -> assign
 Rule 4     stmt -> out
 Rule 5     stmt -> if
 Rule 6     stmt -> loop
-Rule 7     if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-Rule 8     if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-Rule 9     if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-Rule 10    if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET
-Rule 11    loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-Rule 12    loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
-Rule 13    assign -> ID ASSIGNER relexp
-Rule 14    out -> PRINT relexp
-Rule 15    relexp -> expression
-Rule 16    relexp -> relexp GT relexp
-Rule 17    relexp -> relexp EQ relexp
-Rule 18    relexp -> relexp LT relexp
-Rule 19    expression -> expression PLUS expression
-Rule 20    expression -> expression OR relexp
-Rule 21    expression -> expression MINUS expression
-Rule 22    expression -> term
-Rule 23    term -> term MULT expression
-Rule 24    term -> term DIV expression
-Rule 25    term -> term AND relexp
-Rule 26    term -> factor
-Rule 27    factor -> NUMBER
-Rule 28    factor -> ID
-Rule 29    factor -> INPUT
-Rule 30    factor -> PLUS expression
-Rule 31    factor -> MINUS expression
-Rule 32    factor -> NOT relexp
-Rule 33    factor -> OPEN_PARENT relexp CLOSE_PARENT
-Rule 34    empty -> <empty>
+Rule 7     stmt -> funcdec
+Rule 8     funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
+Rule 9     params -> OPEN_PARENT args CLOSE_PARENT
+Rule 10    params -> OPEN_PARENT CLOSE_PARENT
+Rule 11    args -> args COMMA ID
+Rule 12    args -> ID
+Rule 13    if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+Rule 14    if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+Rule 15    if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+Rule 16    if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET
+Rule 17    loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+Rule 18    loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+Rule 19    assign -> ID ASSIGNER relexp
+Rule 20    out -> PRINT relexp
+Rule 21    relexp -> expression
+Rule 22    relexp -> relexp GT relexp
+Rule 23    relexp -> relexp EQ relexp
+Rule 24    relexp -> relexp LT relexp
+Rule 25    expression -> expression PLUS expression
+Rule 26    expression -> expression OR relexp
+Rule 27    expression -> expression MINUS expression
+Rule 28    expression -> term
+Rule 29    term -> term MULT expression
+Rule 30    term -> term DIV expression
+Rule 31    term -> term AND relexp
+Rule 32    term -> factor
+Rule 33    factor -> NUMBER
+Rule 34    factor -> ID
+Rule 35    factor -> INPUT
+Rule 36    factor -> PLUS expression
+Rule 37    factor -> MINUS expression
+Rule 38    factor -> NOT relexp
+Rule 39    factor -> OPEN_PARENT relexp CLOSE_PARENT
+Rule 40    factor -> ID callparams
+Rule 41    callparams -> OPEN_PARENT callargs CLOSE_PARENT
+Rule 42    callparams -> OPEN_PARENT CLOSE_PARENT
+Rule 43    callargs -> callargs COMMA relexp
+Rule 44    callargs -> relexp
+Rule 45    empty -> <empty>
 
 Terminals, with rules where they appear
 
-AND                  : 25
-ASSIGNER             : 13
-CLOSE_BRACKET        : 7 7 8 9 9 10 11 12
-CLOSE_PARENT         : 33
-COMMENT              : 
-DIV                  : 24
-ELSE                 : 7 9
-EQ                   : 17
-GT                   : 16
-ID                   : 13 28
-IF                   : 7 8 9 10
-INPUT                : 29
-LOOP                 : 11 12
-LT                   : 18
-MINUS                : 21 31
-MULT                 : 23
-NOT                  : 32
-NUMBER               : 27
-OPEN_BRACKET         : 7 7 8 9 9 10 11 12
-OPEN_PARENT          : 33
-OR                   : 20
-PLUS                 : 19 30
-PRINT                : 14
-error                : 9 10 12
+AND                  : 31
+ASSIGNER             : 19
+CLOSE_BRACKET        : 8 13 13 14 15 15 16 17 18
+CLOSE_PARENT         : 9 10 39 41 42
+COMMA                : 11 43
+DIV                  : 30
+ELSE                 : 13 15
+EQ                   : 23
+FUNCTION             : 8
+GT                   : 22
+ID                   : 8 11 12 19 34 40
+IF                   : 13 14 15 16
+INPUT                : 35
+LOOP                 : 17 18
+LT                   : 24
+MINUS                : 27 37
+MULT                 : 29
+NOT                  : 38
+NUMBER               : 33
+OPEN_BRACKET         : 8 13 13 14 15 15 16 17 18
+OPEN_PARENT          : 9 10 39 41 42
+OR                   : 26
+PLUS                 : 25 36
+PRINT                : 20
+error                : 15 16 18
 
 Nonterminals, with rules where they appear
 
+args                 : 9 11
 assign               : 3
+callargs             : 41 43
+callparams           : 40
 empty                : 2
-expression           : 15 19 19 20 21 21 23 24 30 31
-factor               : 26
+expression           : 21 25 25 26 27 27 29 30 36 37
+factor               : 32
+funcdec              : 7
 if                   : 5
 loop                 : 6
 out                  : 4
-relexp               : 7 8 11 13 14 16 16 17 17 18 18 20 25 32 33
+params               : 8
+relexp               : 13 14 17 19 20 22 22 23 23 24 24 26 31 38 39 43 44
 stmt                 : 1
-stmts                : 1 7 7 8 9 9 10 11 12 0
-term                 : 22 23 24 25
+stmts                : 1 8 13 13 14 15 15 16 17 18 0
+term                 : 28 29 30 31
 
 Parsing method: LALR
 
@@ -94,21 +107,24 @@ state 0
     (4) stmt -> . out
     (5) stmt -> . if
     (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
 
-    $end            reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
+    $end            reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
 
     stmts                          shift and go to state 1
     stmt                           shift and go to state 2
@@ -117,6 +133,7 @@ state 0
     out                            shift and go to state 5
     if                             shift and go to state 6
     loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
 
 state 1
 
@@ -133,30 +150,34 @@ state 2
     (4) stmt -> . out
     (5) stmt -> . if
     (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
 
-    $end            reduce using rule 34 (empty -> .)
-    CLOSE_BRACKET   reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
+    $end            reduce using rule 45 (empty -> .)
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
 
     stmt                           shift and go to state 2
-    stmts                          shift and go to state 12
+    stmts                          shift and go to state 14
     empty                          shift and go to state 3
     assign                         shift and go to state 4
     out                            shift and go to state 5
     if                             shift and go to state 6
     loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
 
 state 3
 
@@ -174,6 +195,7 @@ state 4
     PRINT           reduce using rule 3 (stmt -> assign .)
     IF              reduce using rule 3 (stmt -> assign .)
     LOOP            reduce using rule 3 (stmt -> assign .)
+    FUNCTION        reduce using rule 3 (stmt -> assign .)
     $end            reduce using rule 3 (stmt -> assign .)
     CLOSE_BRACKET   reduce using rule 3 (stmt -> assign .)
 
@@ -186,6 +208,7 @@ state 5
     PRINT           reduce using rule 4 (stmt -> out .)
     IF              reduce using rule 4 (stmt -> out .)
     LOOP            reduce using rule 4 (stmt -> out .)
+    FUNCTION        reduce using rule 4 (stmt -> out .)
     $end            reduce using rule 4 (stmt -> out .)
     CLOSE_BRACKET   reduce using rule 4 (stmt -> out .)
 
@@ -198,6 +221,7 @@ state 6
     PRINT           reduce using rule 5 (stmt -> if .)
     IF              reduce using rule 5 (stmt -> if .)
     LOOP            reduce using rule 5 (stmt -> if .)
+    FUNCTION        reduce using rule 5 (stmt -> if .)
     $end            reduce using rule 5 (stmt -> if .)
     CLOSE_BRACKET   reduce using rule 5 (stmt -> if .)
 
@@ -210,132 +234,156 @@ state 7
     PRINT           reduce using rule 6 (stmt -> loop .)
     IF              reduce using rule 6 (stmt -> loop .)
     LOOP            reduce using rule 6 (stmt -> loop .)
+    FUNCTION        reduce using rule 6 (stmt -> loop .)
     $end            reduce using rule 6 (stmt -> loop .)
     CLOSE_BRACKET   reduce using rule 6 (stmt -> loop .)
 
 
 state 8
 
-    (13) assign -> ID . ASSIGNER relexp
+    (7) stmt -> funcdec .
 
-    ASSIGNER        shift and go to state 13
+    ID              reduce using rule 7 (stmt -> funcdec .)
+    PRINT           reduce using rule 7 (stmt -> funcdec .)
+    IF              reduce using rule 7 (stmt -> funcdec .)
+    LOOP            reduce using rule 7 (stmt -> funcdec .)
+    FUNCTION        reduce using rule 7 (stmt -> funcdec .)
+    $end            reduce using rule 7 (stmt -> funcdec .)
+    CLOSE_BRACKET   reduce using rule 7 (stmt -> funcdec .)
 
 
 state 9
 
-    (14) out -> PRINT . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (19) assign -> ID . ASSIGNER relexp
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    ASSIGNER        shift and go to state 15
 
-    relexp                         shift and go to state 14
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
 
 state 10
 
-    (7) if -> IF . relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> IF . relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> IF . error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> IF . error OPEN_BRACKET stmts CLOSE_BRACKET
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (20) out -> PRINT . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    error           shift and go to state 26
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-    relexp                         shift and go to state 25
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
+    relexp                         shift and go to state 16
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 11
 
-    (11) loop -> LOOP . relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> LOOP . error OPEN_BRACKET stmts CLOSE_BRACKET
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (13) if -> IF . relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> IF . relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> IF . error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> IF . error OPEN_BRACKET stmts CLOSE_BRACKET
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
     error           shift and go to state 28
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
     relexp                         shift and go to state 27
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 12
+
+    (17) loop -> LOOP . relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> LOOP . error OPEN_BRACKET stmts CLOSE_BRACKET
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
+
+    error           shift and go to state 30
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
+
+    relexp                         shift and go to state 29
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
+
+state 13
+
+    (8) funcdec -> FUNCTION . ID params OPEN_BRACKET stmts CLOSE_BRACKET
+
+    ID              shift and go to state 31
+
+
+state 14
 
     (1) stmts -> stmt stmts .
 
@@ -343,1384 +391,1041 @@ state 12
     CLOSE_BRACKET   reduce using rule 1 (stmts -> stmt stmts .)
 
 
-state 13
-
-    (13) assign -> ID ASSIGNER . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
-
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
-
-    relexp                         shift and go to state 29
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
-
-state 14
-
-    (14) out -> PRINT relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
-
-    ID              reduce using rule 14 (out -> PRINT relexp .)
-    PRINT           reduce using rule 14 (out -> PRINT relexp .)
-    IF              reduce using rule 14 (out -> PRINT relexp .)
-    LOOP            reduce using rule 14 (out -> PRINT relexp .)
-    $end            reduce using rule 14 (out -> PRINT relexp .)
-    CLOSE_BRACKET   reduce using rule 14 (out -> PRINT relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
-
-
 state 15
 
-    (15) relexp -> expression .
-    (19) expression -> expression . PLUS expression
-    (20) expression -> expression . OR relexp
-    (21) expression -> expression . MINUS expression
+    (19) assign -> ID ASSIGNER . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
+
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
+
+    relexp                         shift and go to state 32
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
+
+state 16
+
+    (20) out -> PRINT relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+    ID              reduce using rule 20 (out -> PRINT relexp .)
+    PRINT           reduce using rule 20 (out -> PRINT relexp .)
+    IF              reduce using rule 20 (out -> PRINT relexp .)
+    LOOP            reduce using rule 20 (out -> PRINT relexp .)
+    FUNCTION        reduce using rule 20 (out -> PRINT relexp .)
+    $end            reduce using rule 20 (out -> PRINT relexp .)
+    CLOSE_BRACKET   reduce using rule 20 (out -> PRINT relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+
+state 17
+
+    (21) relexp -> expression .
+    (25) expression -> expression . PLUS expression
+    (26) expression -> expression . OR relexp
+    (27) expression -> expression . MINUS expression
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for OR resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
-    GT              reduce using rule 15 (relexp -> expression .)
-    EQ              reduce using rule 15 (relexp -> expression .)
-    LT              reduce using rule 15 (relexp -> expression .)
-    ID              reduce using rule 15 (relexp -> expression .)
-    PRINT           reduce using rule 15 (relexp -> expression .)
-    IF              reduce using rule 15 (relexp -> expression .)
-    LOOP            reduce using rule 15 (relexp -> expression .)
-    $end            reduce using rule 15 (relexp -> expression .)
-    CLOSE_BRACKET   reduce using rule 15 (relexp -> expression .)
-    OPEN_BRACKET    reduce using rule 15 (relexp -> expression .)
-    MULT            reduce using rule 15 (relexp -> expression .)
-    DIV             reduce using rule 15 (relexp -> expression .)
-    AND             reduce using rule 15 (relexp -> expression .)
-    CLOSE_PARENT    reduce using rule 15 (relexp -> expression .)
-    PLUS            shift and go to state 33
-    OR              shift and go to state 34
-    MINUS           shift and go to state 35
+    GT              reduce using rule 21 (relexp -> expression .)
+    EQ              reduce using rule 21 (relexp -> expression .)
+    LT              reduce using rule 21 (relexp -> expression .)
+    ID              reduce using rule 21 (relexp -> expression .)
+    PRINT           reduce using rule 21 (relexp -> expression .)
+    IF              reduce using rule 21 (relexp -> expression .)
+    LOOP            reduce using rule 21 (relexp -> expression .)
+    FUNCTION        reduce using rule 21 (relexp -> expression .)
+    $end            reduce using rule 21 (relexp -> expression .)
+    CLOSE_BRACKET   reduce using rule 21 (relexp -> expression .)
+    OPEN_BRACKET    reduce using rule 21 (relexp -> expression .)
+    MULT            reduce using rule 21 (relexp -> expression .)
+    DIV             reduce using rule 21 (relexp -> expression .)
+    AND             reduce using rule 21 (relexp -> expression .)
+    CLOSE_PARENT    reduce using rule 21 (relexp -> expression .)
+    COMMA           reduce using rule 21 (relexp -> expression .)
+    PLUS            shift and go to state 36
+    OR              shift and go to state 37
+    MINUS           shift and go to state 38
 
-  ! PLUS            [ reduce using rule 15 (relexp -> expression .) ]
-  ! OR              [ reduce using rule 15 (relexp -> expression .) ]
-  ! MINUS           [ reduce using rule 15 (relexp -> expression .) ]
+  ! PLUS            [ reduce using rule 21 (relexp -> expression .) ]
+  ! OR              [ reduce using rule 21 (relexp -> expression .) ]
+  ! MINUS           [ reduce using rule 21 (relexp -> expression .) ]
 
-
-state 16
-
-    (30) factor -> PLUS . expression
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
-
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
-
-    expression                     shift and go to state 36
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
-
-state 17
-
-    (31) factor -> MINUS . expression
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
-
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
-
-    expression                     shift and go to state 37
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
 
 state 18
 
-    (22) expression -> term .
-    (23) term -> term . MULT expression
-    (24) term -> term . DIV expression
-    (25) term -> term . AND relexp
+    (36) factor -> PLUS . expression
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
+
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
+
+    expression                     shift and go to state 39
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
+
+state 19
+
+    (37) factor -> MINUS . expression
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
+
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
+
+    expression                     shift and go to state 40
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
+
+state 20
+
+    (28) expression -> term .
+    (29) term -> term . MULT expression
+    (30) term -> term . DIV expression
+    (31) term -> term . AND relexp
 
   ! shift/reduce conflict for MULT resolved as shift
   ! shift/reduce conflict for DIV resolved as shift
   ! shift/reduce conflict for AND resolved as shift
-    PLUS            reduce using rule 22 (expression -> term .)
-    OR              reduce using rule 22 (expression -> term .)
-    MINUS           reduce using rule 22 (expression -> term .)
-    GT              reduce using rule 22 (expression -> term .)
-    EQ              reduce using rule 22 (expression -> term .)
-    LT              reduce using rule 22 (expression -> term .)
-    ID              reduce using rule 22 (expression -> term .)
-    PRINT           reduce using rule 22 (expression -> term .)
-    IF              reduce using rule 22 (expression -> term .)
-    LOOP            reduce using rule 22 (expression -> term .)
-    $end            reduce using rule 22 (expression -> term .)
-    CLOSE_BRACKET   reduce using rule 22 (expression -> term .)
-    OPEN_BRACKET    reduce using rule 22 (expression -> term .)
-    CLOSE_PARENT    reduce using rule 22 (expression -> term .)
-    MULT            shift and go to state 38
-    DIV             shift and go to state 39
-    AND             shift and go to state 40
+    PLUS            reduce using rule 28 (expression -> term .)
+    OR              reduce using rule 28 (expression -> term .)
+    MINUS           reduce using rule 28 (expression -> term .)
+    GT              reduce using rule 28 (expression -> term .)
+    EQ              reduce using rule 28 (expression -> term .)
+    LT              reduce using rule 28 (expression -> term .)
+    ID              reduce using rule 28 (expression -> term .)
+    PRINT           reduce using rule 28 (expression -> term .)
+    IF              reduce using rule 28 (expression -> term .)
+    LOOP            reduce using rule 28 (expression -> term .)
+    FUNCTION        reduce using rule 28 (expression -> term .)
+    $end            reduce using rule 28 (expression -> term .)
+    CLOSE_BRACKET   reduce using rule 28 (expression -> term .)
+    OPEN_BRACKET    reduce using rule 28 (expression -> term .)
+    CLOSE_PARENT    reduce using rule 28 (expression -> term .)
+    COMMA           reduce using rule 28 (expression -> term .)
+    MULT            shift and go to state 41
+    DIV             shift and go to state 42
+    AND             shift and go to state 43
 
-  ! MULT            [ reduce using rule 22 (expression -> term .) ]
-  ! DIV             [ reduce using rule 22 (expression -> term .) ]
-  ! AND             [ reduce using rule 22 (expression -> term .) ]
-
-
-state 19
-
-    (26) term -> factor .
-
-    MULT            reduce using rule 26 (term -> factor .)
-    DIV             reduce using rule 26 (term -> factor .)
-    AND             reduce using rule 26 (term -> factor .)
-    PLUS            reduce using rule 26 (term -> factor .)
-    OR              reduce using rule 26 (term -> factor .)
-    MINUS           reduce using rule 26 (term -> factor .)
-    GT              reduce using rule 26 (term -> factor .)
-    EQ              reduce using rule 26 (term -> factor .)
-    LT              reduce using rule 26 (term -> factor .)
-    ID              reduce using rule 26 (term -> factor .)
-    PRINT           reduce using rule 26 (term -> factor .)
-    IF              reduce using rule 26 (term -> factor .)
-    LOOP            reduce using rule 26 (term -> factor .)
-    $end            reduce using rule 26 (term -> factor .)
-    CLOSE_BRACKET   reduce using rule 26 (term -> factor .)
-    OPEN_BRACKET    reduce using rule 26 (term -> factor .)
-    CLOSE_PARENT    reduce using rule 26 (term -> factor .)
-
-
-state 20
-
-    (27) factor -> NUMBER .
-
-    MULT            reduce using rule 27 (factor -> NUMBER .)
-    DIV             reduce using rule 27 (factor -> NUMBER .)
-    AND             reduce using rule 27 (factor -> NUMBER .)
-    PLUS            reduce using rule 27 (factor -> NUMBER .)
-    OR              reduce using rule 27 (factor -> NUMBER .)
-    MINUS           reduce using rule 27 (factor -> NUMBER .)
-    GT              reduce using rule 27 (factor -> NUMBER .)
-    EQ              reduce using rule 27 (factor -> NUMBER .)
-    LT              reduce using rule 27 (factor -> NUMBER .)
-    ID              reduce using rule 27 (factor -> NUMBER .)
-    PRINT           reduce using rule 27 (factor -> NUMBER .)
-    IF              reduce using rule 27 (factor -> NUMBER .)
-    LOOP            reduce using rule 27 (factor -> NUMBER .)
-    $end            reduce using rule 27 (factor -> NUMBER .)
-    CLOSE_BRACKET   reduce using rule 27 (factor -> NUMBER .)
-    OPEN_BRACKET    reduce using rule 27 (factor -> NUMBER .)
-    CLOSE_PARENT    reduce using rule 27 (factor -> NUMBER .)
+  ! MULT            [ reduce using rule 28 (expression -> term .) ]
+  ! DIV             [ reduce using rule 28 (expression -> term .) ]
+  ! AND             [ reduce using rule 28 (expression -> term .) ]
 
 
 state 21
 
-    (28) factor -> ID .
+    (32) term -> factor .
 
-    MULT            reduce using rule 28 (factor -> ID .)
-    DIV             reduce using rule 28 (factor -> ID .)
-    AND             reduce using rule 28 (factor -> ID .)
-    PLUS            reduce using rule 28 (factor -> ID .)
-    OR              reduce using rule 28 (factor -> ID .)
-    MINUS           reduce using rule 28 (factor -> ID .)
-    GT              reduce using rule 28 (factor -> ID .)
-    EQ              reduce using rule 28 (factor -> ID .)
-    LT              reduce using rule 28 (factor -> ID .)
-    ID              reduce using rule 28 (factor -> ID .)
-    PRINT           reduce using rule 28 (factor -> ID .)
-    IF              reduce using rule 28 (factor -> ID .)
-    LOOP            reduce using rule 28 (factor -> ID .)
-    $end            reduce using rule 28 (factor -> ID .)
-    CLOSE_BRACKET   reduce using rule 28 (factor -> ID .)
-    OPEN_BRACKET    reduce using rule 28 (factor -> ID .)
-    CLOSE_PARENT    reduce using rule 28 (factor -> ID .)
+    MULT            reduce using rule 32 (term -> factor .)
+    DIV             reduce using rule 32 (term -> factor .)
+    AND             reduce using rule 32 (term -> factor .)
+    PLUS            reduce using rule 32 (term -> factor .)
+    OR              reduce using rule 32 (term -> factor .)
+    MINUS           reduce using rule 32 (term -> factor .)
+    GT              reduce using rule 32 (term -> factor .)
+    EQ              reduce using rule 32 (term -> factor .)
+    LT              reduce using rule 32 (term -> factor .)
+    ID              reduce using rule 32 (term -> factor .)
+    PRINT           reduce using rule 32 (term -> factor .)
+    IF              reduce using rule 32 (term -> factor .)
+    LOOP            reduce using rule 32 (term -> factor .)
+    FUNCTION        reduce using rule 32 (term -> factor .)
+    $end            reduce using rule 32 (term -> factor .)
+    CLOSE_BRACKET   reduce using rule 32 (term -> factor .)
+    OPEN_BRACKET    reduce using rule 32 (term -> factor .)
+    CLOSE_PARENT    reduce using rule 32 (term -> factor .)
+    COMMA           reduce using rule 32 (term -> factor .)
 
 
 state 22
 
-    (29) factor -> INPUT .
+    (33) factor -> NUMBER .
 
-    MULT            reduce using rule 29 (factor -> INPUT .)
-    DIV             reduce using rule 29 (factor -> INPUT .)
-    AND             reduce using rule 29 (factor -> INPUT .)
-    PLUS            reduce using rule 29 (factor -> INPUT .)
-    OR              reduce using rule 29 (factor -> INPUT .)
-    MINUS           reduce using rule 29 (factor -> INPUT .)
-    GT              reduce using rule 29 (factor -> INPUT .)
-    EQ              reduce using rule 29 (factor -> INPUT .)
-    LT              reduce using rule 29 (factor -> INPUT .)
-    ID              reduce using rule 29 (factor -> INPUT .)
-    PRINT           reduce using rule 29 (factor -> INPUT .)
-    IF              reduce using rule 29 (factor -> INPUT .)
-    LOOP            reduce using rule 29 (factor -> INPUT .)
-    $end            reduce using rule 29 (factor -> INPUT .)
-    CLOSE_BRACKET   reduce using rule 29 (factor -> INPUT .)
-    OPEN_BRACKET    reduce using rule 29 (factor -> INPUT .)
-    CLOSE_PARENT    reduce using rule 29 (factor -> INPUT .)
+    MULT            reduce using rule 33 (factor -> NUMBER .)
+    DIV             reduce using rule 33 (factor -> NUMBER .)
+    AND             reduce using rule 33 (factor -> NUMBER .)
+    PLUS            reduce using rule 33 (factor -> NUMBER .)
+    OR              reduce using rule 33 (factor -> NUMBER .)
+    MINUS           reduce using rule 33 (factor -> NUMBER .)
+    GT              reduce using rule 33 (factor -> NUMBER .)
+    EQ              reduce using rule 33 (factor -> NUMBER .)
+    LT              reduce using rule 33 (factor -> NUMBER .)
+    ID              reduce using rule 33 (factor -> NUMBER .)
+    PRINT           reduce using rule 33 (factor -> NUMBER .)
+    IF              reduce using rule 33 (factor -> NUMBER .)
+    LOOP            reduce using rule 33 (factor -> NUMBER .)
+    FUNCTION        reduce using rule 33 (factor -> NUMBER .)
+    $end            reduce using rule 33 (factor -> NUMBER .)
+    CLOSE_BRACKET   reduce using rule 33 (factor -> NUMBER .)
+    OPEN_BRACKET    reduce using rule 33 (factor -> NUMBER .)
+    CLOSE_PARENT    reduce using rule 33 (factor -> NUMBER .)
+    COMMA           reduce using rule 33 (factor -> NUMBER .)
 
 
 state 23
 
-    (32) factor -> NOT . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (34) factor -> ID .
+    (40) factor -> ID . callparams
+    (41) callparams -> . OPEN_PARENT callargs CLOSE_PARENT
+    (42) callparams -> . OPEN_PARENT CLOSE_PARENT
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    MULT            reduce using rule 34 (factor -> ID .)
+    DIV             reduce using rule 34 (factor -> ID .)
+    AND             reduce using rule 34 (factor -> ID .)
+    PLUS            reduce using rule 34 (factor -> ID .)
+    OR              reduce using rule 34 (factor -> ID .)
+    MINUS           reduce using rule 34 (factor -> ID .)
+    GT              reduce using rule 34 (factor -> ID .)
+    EQ              reduce using rule 34 (factor -> ID .)
+    LT              reduce using rule 34 (factor -> ID .)
+    ID              reduce using rule 34 (factor -> ID .)
+    PRINT           reduce using rule 34 (factor -> ID .)
+    IF              reduce using rule 34 (factor -> ID .)
+    LOOP            reduce using rule 34 (factor -> ID .)
+    FUNCTION        reduce using rule 34 (factor -> ID .)
+    $end            reduce using rule 34 (factor -> ID .)
+    CLOSE_BRACKET   reduce using rule 34 (factor -> ID .)
+    OPEN_BRACKET    reduce using rule 34 (factor -> ID .)
+    CLOSE_PARENT    reduce using rule 34 (factor -> ID .)
+    COMMA           reduce using rule 34 (factor -> ID .)
+    OPEN_PARENT     shift and go to state 45
 
-    relexp                         shift and go to state 41
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
+    callparams                     shift and go to state 44
 
 state 24
 
-    (33) factor -> OPEN_PARENT . relexp CLOSE_PARENT
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (35) factor -> INPUT .
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    MULT            reduce using rule 35 (factor -> INPUT .)
+    DIV             reduce using rule 35 (factor -> INPUT .)
+    AND             reduce using rule 35 (factor -> INPUT .)
+    PLUS            reduce using rule 35 (factor -> INPUT .)
+    OR              reduce using rule 35 (factor -> INPUT .)
+    MINUS           reduce using rule 35 (factor -> INPUT .)
+    GT              reduce using rule 35 (factor -> INPUT .)
+    EQ              reduce using rule 35 (factor -> INPUT .)
+    LT              reduce using rule 35 (factor -> INPUT .)
+    ID              reduce using rule 35 (factor -> INPUT .)
+    PRINT           reduce using rule 35 (factor -> INPUT .)
+    IF              reduce using rule 35 (factor -> INPUT .)
+    LOOP            reduce using rule 35 (factor -> INPUT .)
+    FUNCTION        reduce using rule 35 (factor -> INPUT .)
+    $end            reduce using rule 35 (factor -> INPUT .)
+    CLOSE_BRACKET   reduce using rule 35 (factor -> INPUT .)
+    OPEN_BRACKET    reduce using rule 35 (factor -> INPUT .)
+    CLOSE_PARENT    reduce using rule 35 (factor -> INPUT .)
+    COMMA           reduce using rule 35 (factor -> INPUT .)
 
-    relexp                         shift and go to state 42
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
 
 state 25
 
-    (7) if -> IF relexp . OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> IF relexp . OPEN_BRACKET stmts CLOSE_BRACKET
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
+    (38) factor -> NOT . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    OPEN_BRACKET    shift and go to state 43
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
+    relexp                         shift and go to state 46
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 26
 
-    (9) if -> IF error . OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> IF error . OPEN_BRACKET stmts CLOSE_BRACKET
+    (39) factor -> OPEN_PARENT . relexp CLOSE_PARENT
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    OPEN_BRACKET    shift and go to state 44
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
+    relexp                         shift and go to state 47
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 27
 
-    (11) loop -> LOOP relexp . OPEN_BRACKET stmts CLOSE_BRACKET
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
+    (13) if -> IF relexp . OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> IF relexp . OPEN_BRACKET stmts CLOSE_BRACKET
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
 
-    OPEN_BRACKET    shift and go to state 45
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
+    OPEN_BRACKET    shift and go to state 48
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
 
 
 state 28
 
-    (12) loop -> LOOP error . OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> IF error . OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> IF error . OPEN_BRACKET stmts CLOSE_BRACKET
 
-    OPEN_BRACKET    shift and go to state 46
+    OPEN_BRACKET    shift and go to state 49
 
 
 state 29
 
-    (13) assign -> ID ASSIGNER relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
+    (17) loop -> LOOP relexp . OPEN_BRACKET stmts CLOSE_BRACKET
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
 
-    ID              reduce using rule 13 (assign -> ID ASSIGNER relexp .)
-    PRINT           reduce using rule 13 (assign -> ID ASSIGNER relexp .)
-    IF              reduce using rule 13 (assign -> ID ASSIGNER relexp .)
-    LOOP            reduce using rule 13 (assign -> ID ASSIGNER relexp .)
-    $end            reduce using rule 13 (assign -> ID ASSIGNER relexp .)
-    CLOSE_BRACKET   reduce using rule 13 (assign -> ID ASSIGNER relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
+    OPEN_BRACKET    shift and go to state 50
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
 
 
 state 30
 
-    (16) relexp -> relexp GT . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (18) loop -> LOOP error . OPEN_BRACKET stmts CLOSE_BRACKET
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    OPEN_BRACKET    shift and go to state 51
 
-    relexp                         shift and go to state 47
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
 
 state 31
 
-    (17) relexp -> relexp EQ . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (8) funcdec -> FUNCTION ID . params OPEN_BRACKET stmts CLOSE_BRACKET
+    (9) params -> . OPEN_PARENT args CLOSE_PARENT
+    (10) params -> . OPEN_PARENT CLOSE_PARENT
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    OPEN_PARENT     shift and go to state 53
 
-    relexp                         shift and go to state 48
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
+    params                         shift and go to state 52
 
 state 32
 
-    (18) relexp -> relexp LT . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (19) assign -> ID ASSIGNER relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    ID              reduce using rule 19 (assign -> ID ASSIGNER relexp .)
+    PRINT           reduce using rule 19 (assign -> ID ASSIGNER relexp .)
+    IF              reduce using rule 19 (assign -> ID ASSIGNER relexp .)
+    LOOP            reduce using rule 19 (assign -> ID ASSIGNER relexp .)
+    FUNCTION        reduce using rule 19 (assign -> ID ASSIGNER relexp .)
+    $end            reduce using rule 19 (assign -> ID ASSIGNER relexp .)
+    CLOSE_BRACKET   reduce using rule 19 (assign -> ID ASSIGNER relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
 
-    relexp                         shift and go to state 49
-    expression                     shift and go to state 15
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
 
 state 33
 
-    (19) expression -> expression PLUS . expression
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (22) relexp -> relexp GT . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-    expression                     shift and go to state 50
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
+    relexp                         shift and go to state 54
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 34
 
-    (20) expression -> expression OR . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (23) relexp -> relexp EQ . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-    expression                     shift and go to state 15
-    relexp                         shift and go to state 51
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
+    relexp                         shift and go to state 55
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 35
 
-    (21) expression -> expression MINUS . expression
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (24) relexp -> relexp LT . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-    expression                     shift and go to state 52
-    term                           shift and go to state 18
-    factor                         shift and go to state 19
+    relexp                         shift and go to state 56
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 36
 
-    (30) factor -> PLUS expression .
-    (19) expression -> expression . PLUS expression
-    (20) expression -> expression . OR relexp
-    (21) expression -> expression . MINUS expression
+    (25) expression -> expression PLUS . expression
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    MULT            reduce using rule 30 (factor -> PLUS expression .)
-    DIV             reduce using rule 30 (factor -> PLUS expression .)
-    AND             reduce using rule 30 (factor -> PLUS expression .)
-    PLUS            reduce using rule 30 (factor -> PLUS expression .)
-    OR              reduce using rule 30 (factor -> PLUS expression .)
-    MINUS           reduce using rule 30 (factor -> PLUS expression .)
-    GT              reduce using rule 30 (factor -> PLUS expression .)
-    EQ              reduce using rule 30 (factor -> PLUS expression .)
-    LT              reduce using rule 30 (factor -> PLUS expression .)
-    ID              reduce using rule 30 (factor -> PLUS expression .)
-    PRINT           reduce using rule 30 (factor -> PLUS expression .)
-    IF              reduce using rule 30 (factor -> PLUS expression .)
-    LOOP            reduce using rule 30 (factor -> PLUS expression .)
-    $end            reduce using rule 30 (factor -> PLUS expression .)
-    CLOSE_BRACKET   reduce using rule 30 (factor -> PLUS expression .)
-    OPEN_BRACKET    reduce using rule 30 (factor -> PLUS expression .)
-    CLOSE_PARENT    reduce using rule 30 (factor -> PLUS expression .)
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-  ! PLUS            [ shift and go to state 33 ]
-  ! OR              [ shift and go to state 34 ]
-  ! MINUS           [ shift and go to state 35 ]
-
+    expression                     shift and go to state 57
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 37
 
-    (31) factor -> MINUS expression .
-    (19) expression -> expression . PLUS expression
-    (20) expression -> expression . OR relexp
-    (21) expression -> expression . MINUS expression
+    (26) expression -> expression OR . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    MULT            reduce using rule 31 (factor -> MINUS expression .)
-    DIV             reduce using rule 31 (factor -> MINUS expression .)
-    AND             reduce using rule 31 (factor -> MINUS expression .)
-    PLUS            reduce using rule 31 (factor -> MINUS expression .)
-    OR              reduce using rule 31 (factor -> MINUS expression .)
-    MINUS           reduce using rule 31 (factor -> MINUS expression .)
-    GT              reduce using rule 31 (factor -> MINUS expression .)
-    EQ              reduce using rule 31 (factor -> MINUS expression .)
-    LT              reduce using rule 31 (factor -> MINUS expression .)
-    ID              reduce using rule 31 (factor -> MINUS expression .)
-    PRINT           reduce using rule 31 (factor -> MINUS expression .)
-    IF              reduce using rule 31 (factor -> MINUS expression .)
-    LOOP            reduce using rule 31 (factor -> MINUS expression .)
-    $end            reduce using rule 31 (factor -> MINUS expression .)
-    CLOSE_BRACKET   reduce using rule 31 (factor -> MINUS expression .)
-    OPEN_BRACKET    reduce using rule 31 (factor -> MINUS expression .)
-    CLOSE_PARENT    reduce using rule 31 (factor -> MINUS expression .)
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-  ! PLUS            [ shift and go to state 33 ]
-  ! OR              [ shift and go to state 34 ]
-  ! MINUS           [ shift and go to state 35 ]
-
+    expression                     shift and go to state 17
+    relexp                         shift and go to state 58
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 38
 
-    (23) term -> term MULT . expression
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (27) expression -> expression MINUS . expression
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-    term                           shift and go to state 18
-    expression                     shift and go to state 53
-    factor                         shift and go to state 19
+    expression                     shift and go to state 59
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 39
 
-    (24) term -> term DIV . expression
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (36) factor -> PLUS expression .
+    (25) expression -> expression . PLUS expression
+    (26) expression -> expression . OR relexp
+    (27) expression -> expression . MINUS expression
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    MULT            reduce using rule 36 (factor -> PLUS expression .)
+    DIV             reduce using rule 36 (factor -> PLUS expression .)
+    AND             reduce using rule 36 (factor -> PLUS expression .)
+    PLUS            reduce using rule 36 (factor -> PLUS expression .)
+    OR              reduce using rule 36 (factor -> PLUS expression .)
+    MINUS           reduce using rule 36 (factor -> PLUS expression .)
+    GT              reduce using rule 36 (factor -> PLUS expression .)
+    EQ              reduce using rule 36 (factor -> PLUS expression .)
+    LT              reduce using rule 36 (factor -> PLUS expression .)
+    ID              reduce using rule 36 (factor -> PLUS expression .)
+    PRINT           reduce using rule 36 (factor -> PLUS expression .)
+    IF              reduce using rule 36 (factor -> PLUS expression .)
+    LOOP            reduce using rule 36 (factor -> PLUS expression .)
+    FUNCTION        reduce using rule 36 (factor -> PLUS expression .)
+    $end            reduce using rule 36 (factor -> PLUS expression .)
+    CLOSE_BRACKET   reduce using rule 36 (factor -> PLUS expression .)
+    OPEN_BRACKET    reduce using rule 36 (factor -> PLUS expression .)
+    CLOSE_PARENT    reduce using rule 36 (factor -> PLUS expression .)
+    COMMA           reduce using rule 36 (factor -> PLUS expression .)
 
-    term                           shift and go to state 18
-    expression                     shift and go to state 54
-    factor                         shift and go to state 19
+  ! PLUS            [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
 
 state 40
 
-    (25) term -> term AND . relexp
-    (15) relexp -> . expression
-    (16) relexp -> . relexp GT relexp
-    (17) relexp -> . relexp EQ relexp
-    (18) relexp -> . relexp LT relexp
-    (19) expression -> . expression PLUS expression
-    (20) expression -> . expression OR relexp
-    (21) expression -> . expression MINUS expression
-    (22) expression -> . term
-    (23) term -> . term MULT expression
-    (24) term -> . term DIV expression
-    (25) term -> . term AND relexp
-    (26) term -> . factor
-    (27) factor -> . NUMBER
-    (28) factor -> . ID
-    (29) factor -> . INPUT
-    (30) factor -> . PLUS expression
-    (31) factor -> . MINUS expression
-    (32) factor -> . NOT relexp
-    (33) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (37) factor -> MINUS expression .
+    (25) expression -> expression . PLUS expression
+    (26) expression -> expression . OR relexp
+    (27) expression -> expression . MINUS expression
 
-    NUMBER          shift and go to state 20
-    ID              shift and go to state 21
-    INPUT           shift and go to state 22
-    PLUS            shift and go to state 16
-    MINUS           shift and go to state 17
-    NOT             shift and go to state 23
-    OPEN_PARENT     shift and go to state 24
+    MULT            reduce using rule 37 (factor -> MINUS expression .)
+    DIV             reduce using rule 37 (factor -> MINUS expression .)
+    AND             reduce using rule 37 (factor -> MINUS expression .)
+    PLUS            reduce using rule 37 (factor -> MINUS expression .)
+    OR              reduce using rule 37 (factor -> MINUS expression .)
+    MINUS           reduce using rule 37 (factor -> MINUS expression .)
+    GT              reduce using rule 37 (factor -> MINUS expression .)
+    EQ              reduce using rule 37 (factor -> MINUS expression .)
+    LT              reduce using rule 37 (factor -> MINUS expression .)
+    ID              reduce using rule 37 (factor -> MINUS expression .)
+    PRINT           reduce using rule 37 (factor -> MINUS expression .)
+    IF              reduce using rule 37 (factor -> MINUS expression .)
+    LOOP            reduce using rule 37 (factor -> MINUS expression .)
+    FUNCTION        reduce using rule 37 (factor -> MINUS expression .)
+    $end            reduce using rule 37 (factor -> MINUS expression .)
+    CLOSE_BRACKET   reduce using rule 37 (factor -> MINUS expression .)
+    OPEN_BRACKET    reduce using rule 37 (factor -> MINUS expression .)
+    CLOSE_PARENT    reduce using rule 37 (factor -> MINUS expression .)
+    COMMA           reduce using rule 37 (factor -> MINUS expression .)
 
-    term                           shift and go to state 18
-    relexp                         shift and go to state 55
-    expression                     shift and go to state 15
-    factor                         shift and go to state 19
+  ! PLUS            [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
 
 state 41
 
-    (32) factor -> NOT relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
+    (29) term -> term MULT . expression
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-    MULT            reduce using rule 32 (factor -> NOT relexp .)
-    DIV             reduce using rule 32 (factor -> NOT relexp .)
-    AND             reduce using rule 32 (factor -> NOT relexp .)
-    PLUS            reduce using rule 32 (factor -> NOT relexp .)
-    OR              reduce using rule 32 (factor -> NOT relexp .)
-    MINUS           reduce using rule 32 (factor -> NOT relexp .)
-    ID              reduce using rule 32 (factor -> NOT relexp .)
-    PRINT           reduce using rule 32 (factor -> NOT relexp .)
-    IF              reduce using rule 32 (factor -> NOT relexp .)
-    LOOP            reduce using rule 32 (factor -> NOT relexp .)
-    $end            reduce using rule 32 (factor -> NOT relexp .)
-    CLOSE_BRACKET   reduce using rule 32 (factor -> NOT relexp .)
-    OPEN_BRACKET    reduce using rule 32 (factor -> NOT relexp .)
-    CLOSE_PARENT    reduce using rule 32 (factor -> NOT relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-  ! GT              [ reduce using rule 32 (factor -> NOT relexp .) ]
-  ! EQ              [ reduce using rule 32 (factor -> NOT relexp .) ]
-  ! LT              [ reduce using rule 32 (factor -> NOT relexp .) ]
-
+    term                           shift and go to state 20
+    expression                     shift and go to state 60
+    factor                         shift and go to state 21
 
 state 42
 
-    (33) factor -> OPEN_PARENT relexp . CLOSE_PARENT
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
+    (30) term -> term DIV . expression
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    CLOSE_PARENT    shift and go to state 56
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
+    term                           shift and go to state 20
+    expression                     shift and go to state 61
+    factor                         shift and go to state 21
 
 state 43
 
-    (7) if -> IF relexp OPEN_BRACKET . stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> IF relexp OPEN_BRACKET . stmts CLOSE_BRACKET
-    (1) stmts -> . stmt stmts
-    (2) stmts -> . empty
-    (3) stmt -> . assign
-    (4) stmt -> . out
-    (5) stmt -> . if
-    (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (31) term -> term AND . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    CLOSE_BRACKET   reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-    stmts                          shift and go to state 57
-    stmt                           shift and go to state 2
-    empty                          shift and go to state 3
-    assign                         shift and go to state 4
-    out                            shift and go to state 5
-    if                             shift and go to state 6
-    loop                           shift and go to state 7
+    term                           shift and go to state 20
+    relexp                         shift and go to state 62
+    expression                     shift and go to state 17
+    factor                         shift and go to state 21
 
 state 44
 
-    (9) if -> IF error OPEN_BRACKET . stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> IF error OPEN_BRACKET . stmts CLOSE_BRACKET
-    (1) stmts -> . stmt stmts
-    (2) stmts -> . empty
-    (3) stmt -> . assign
-    (4) stmt -> . out
-    (5) stmt -> . if
-    (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (40) factor -> ID callparams .
 
-    CLOSE_BRACKET   reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
+    MULT            reduce using rule 40 (factor -> ID callparams .)
+    DIV             reduce using rule 40 (factor -> ID callparams .)
+    AND             reduce using rule 40 (factor -> ID callparams .)
+    PLUS            reduce using rule 40 (factor -> ID callparams .)
+    OR              reduce using rule 40 (factor -> ID callparams .)
+    MINUS           reduce using rule 40 (factor -> ID callparams .)
+    GT              reduce using rule 40 (factor -> ID callparams .)
+    EQ              reduce using rule 40 (factor -> ID callparams .)
+    LT              reduce using rule 40 (factor -> ID callparams .)
+    ID              reduce using rule 40 (factor -> ID callparams .)
+    PRINT           reduce using rule 40 (factor -> ID callparams .)
+    IF              reduce using rule 40 (factor -> ID callparams .)
+    LOOP            reduce using rule 40 (factor -> ID callparams .)
+    FUNCTION        reduce using rule 40 (factor -> ID callparams .)
+    $end            reduce using rule 40 (factor -> ID callparams .)
+    CLOSE_BRACKET   reduce using rule 40 (factor -> ID callparams .)
+    OPEN_BRACKET    reduce using rule 40 (factor -> ID callparams .)
+    CLOSE_PARENT    reduce using rule 40 (factor -> ID callparams .)
+    COMMA           reduce using rule 40 (factor -> ID callparams .)
 
-    stmts                          shift and go to state 58
-    stmt                           shift and go to state 2
-    empty                          shift and go to state 3
-    assign                         shift and go to state 4
-    out                            shift and go to state 5
-    if                             shift and go to state 6
-    loop                           shift and go to state 7
 
 state 45
 
-    (11) loop -> LOOP relexp OPEN_BRACKET . stmts CLOSE_BRACKET
-    (1) stmts -> . stmt stmts
-    (2) stmts -> . empty
-    (3) stmt -> . assign
-    (4) stmt -> . out
-    (5) stmt -> . if
-    (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (41) callparams -> OPEN_PARENT . callargs CLOSE_PARENT
+    (42) callparams -> OPEN_PARENT . CLOSE_PARENT
+    (43) callargs -> . callargs COMMA relexp
+    (44) callargs -> . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
 
-    CLOSE_BRACKET   reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
+    CLOSE_PARENT    shift and go to state 64
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
 
-    stmts                          shift and go to state 59
-    stmt                           shift and go to state 2
-    empty                          shift and go to state 3
-    assign                         shift and go to state 4
-    out                            shift and go to state 5
-    if                             shift and go to state 6
-    loop                           shift and go to state 7
+    callargs                       shift and go to state 63
+    relexp                         shift and go to state 65
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
 
 state 46
 
-    (12) loop -> LOOP error OPEN_BRACKET . stmts CLOSE_BRACKET
-    (1) stmts -> . stmt stmts
-    (2) stmts -> . empty
-    (3) stmt -> . assign
-    (4) stmt -> . out
-    (5) stmt -> . if
-    (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
-
-    CLOSE_BRACKET   reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
-
-    stmts                          shift and go to state 60
-    stmt                           shift and go to state 2
-    empty                          shift and go to state 3
-    assign                         shift and go to state 4
-    out                            shift and go to state 5
-    if                             shift and go to state 6
-    loop                           shift and go to state 7
-
-state 47
-
-    (16) relexp -> relexp GT relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
+    (38) factor -> NOT relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
 
   ! shift/reduce conflict for GT resolved as shift
   ! shift/reduce conflict for EQ resolved as shift
   ! shift/reduce conflict for LT resolved as shift
-    ID              reduce using rule 16 (relexp -> relexp GT relexp .)
-    PRINT           reduce using rule 16 (relexp -> relexp GT relexp .)
-    IF              reduce using rule 16 (relexp -> relexp GT relexp .)
-    LOOP            reduce using rule 16 (relexp -> relexp GT relexp .)
-    $end            reduce using rule 16 (relexp -> relexp GT relexp .)
-    CLOSE_BRACKET   reduce using rule 16 (relexp -> relexp GT relexp .)
-    OPEN_BRACKET    reduce using rule 16 (relexp -> relexp GT relexp .)
-    PLUS            reduce using rule 16 (relexp -> relexp GT relexp .)
-    OR              reduce using rule 16 (relexp -> relexp GT relexp .)
-    MINUS           reduce using rule 16 (relexp -> relexp GT relexp .)
-    MULT            reduce using rule 16 (relexp -> relexp GT relexp .)
-    DIV             reduce using rule 16 (relexp -> relexp GT relexp .)
-    AND             reduce using rule 16 (relexp -> relexp GT relexp .)
-    CLOSE_PARENT    reduce using rule 16 (relexp -> relexp GT relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
+    MULT            reduce using rule 38 (factor -> NOT relexp .)
+    DIV             reduce using rule 38 (factor -> NOT relexp .)
+    AND             reduce using rule 38 (factor -> NOT relexp .)
+    PLUS            reduce using rule 38 (factor -> NOT relexp .)
+    OR              reduce using rule 38 (factor -> NOT relexp .)
+    MINUS           reduce using rule 38 (factor -> NOT relexp .)
+    ID              reduce using rule 38 (factor -> NOT relexp .)
+    PRINT           reduce using rule 38 (factor -> NOT relexp .)
+    IF              reduce using rule 38 (factor -> NOT relexp .)
+    LOOP            reduce using rule 38 (factor -> NOT relexp .)
+    FUNCTION        reduce using rule 38 (factor -> NOT relexp .)
+    $end            reduce using rule 38 (factor -> NOT relexp .)
+    CLOSE_BRACKET   reduce using rule 38 (factor -> NOT relexp .)
+    OPEN_BRACKET    reduce using rule 38 (factor -> NOT relexp .)
+    CLOSE_PARENT    reduce using rule 38 (factor -> NOT relexp .)
+    COMMA           reduce using rule 38 (factor -> NOT relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
 
-  ! GT              [ reduce using rule 16 (relexp -> relexp GT relexp .) ]
-  ! EQ              [ reduce using rule 16 (relexp -> relexp GT relexp .) ]
-  ! LT              [ reduce using rule 16 (relexp -> relexp GT relexp .) ]
+  ! GT              [ reduce using rule 38 (factor -> NOT relexp .) ]
+  ! EQ              [ reduce using rule 38 (factor -> NOT relexp .) ]
+  ! LT              [ reduce using rule 38 (factor -> NOT relexp .) ]
+
+
+state 47
+
+    (39) factor -> OPEN_PARENT relexp . CLOSE_PARENT
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+    CLOSE_PARENT    shift and go to state 66
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
 
 
 state 48
 
-    (17) relexp -> relexp EQ relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
-
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-    ID              reduce using rule 17 (relexp -> relexp EQ relexp .)
-    PRINT           reduce using rule 17 (relexp -> relexp EQ relexp .)
-    IF              reduce using rule 17 (relexp -> relexp EQ relexp .)
-    LOOP            reduce using rule 17 (relexp -> relexp EQ relexp .)
-    $end            reduce using rule 17 (relexp -> relexp EQ relexp .)
-    CLOSE_BRACKET   reduce using rule 17 (relexp -> relexp EQ relexp .)
-    OPEN_BRACKET    reduce using rule 17 (relexp -> relexp EQ relexp .)
-    PLUS            reduce using rule 17 (relexp -> relexp EQ relexp .)
-    OR              reduce using rule 17 (relexp -> relexp EQ relexp .)
-    MINUS           reduce using rule 17 (relexp -> relexp EQ relexp .)
-    MULT            reduce using rule 17 (relexp -> relexp EQ relexp .)
-    DIV             reduce using rule 17 (relexp -> relexp EQ relexp .)
-    AND             reduce using rule 17 (relexp -> relexp EQ relexp .)
-    CLOSE_PARENT    reduce using rule 17 (relexp -> relexp EQ relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
-
-  ! GT              [ reduce using rule 17 (relexp -> relexp EQ relexp .) ]
-  ! EQ              [ reduce using rule 17 (relexp -> relexp EQ relexp .) ]
-  ! LT              [ reduce using rule 17 (relexp -> relexp EQ relexp .) ]
-
-
-state 49
-
-    (18) relexp -> relexp LT relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
-
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-    ID              reduce using rule 18 (relexp -> relexp LT relexp .)
-    PRINT           reduce using rule 18 (relexp -> relexp LT relexp .)
-    IF              reduce using rule 18 (relexp -> relexp LT relexp .)
-    LOOP            reduce using rule 18 (relexp -> relexp LT relexp .)
-    $end            reduce using rule 18 (relexp -> relexp LT relexp .)
-    CLOSE_BRACKET   reduce using rule 18 (relexp -> relexp LT relexp .)
-    OPEN_BRACKET    reduce using rule 18 (relexp -> relexp LT relexp .)
-    PLUS            reduce using rule 18 (relexp -> relexp LT relexp .)
-    OR              reduce using rule 18 (relexp -> relexp LT relexp .)
-    MINUS           reduce using rule 18 (relexp -> relexp LT relexp .)
-    MULT            reduce using rule 18 (relexp -> relexp LT relexp .)
-    DIV             reduce using rule 18 (relexp -> relexp LT relexp .)
-    AND             reduce using rule 18 (relexp -> relexp LT relexp .)
-    CLOSE_PARENT    reduce using rule 18 (relexp -> relexp LT relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
-
-  ! GT              [ reduce using rule 18 (relexp -> relexp LT relexp .) ]
-  ! EQ              [ reduce using rule 18 (relexp -> relexp LT relexp .) ]
-  ! LT              [ reduce using rule 18 (relexp -> relexp LT relexp .) ]
-
-
-state 50
-
-    (19) expression -> expression PLUS expression .
-    (19) expression -> expression . PLUS expression
-    (20) expression -> expression . OR relexp
-    (21) expression -> expression . MINUS expression
-
-    PLUS            reduce using rule 19 (expression -> expression PLUS expression .)
-    OR              reduce using rule 19 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 19 (expression -> expression PLUS expression .)
-    GT              reduce using rule 19 (expression -> expression PLUS expression .)
-    EQ              reduce using rule 19 (expression -> expression PLUS expression .)
-    LT              reduce using rule 19 (expression -> expression PLUS expression .)
-    ID              reduce using rule 19 (expression -> expression PLUS expression .)
-    PRINT           reduce using rule 19 (expression -> expression PLUS expression .)
-    IF              reduce using rule 19 (expression -> expression PLUS expression .)
-    LOOP            reduce using rule 19 (expression -> expression PLUS expression .)
-    $end            reduce using rule 19 (expression -> expression PLUS expression .)
-    CLOSE_BRACKET   reduce using rule 19 (expression -> expression PLUS expression .)
-    OPEN_BRACKET    reduce using rule 19 (expression -> expression PLUS expression .)
-    MULT            reduce using rule 19 (expression -> expression PLUS expression .)
-    DIV             reduce using rule 19 (expression -> expression PLUS expression .)
-    AND             reduce using rule 19 (expression -> expression PLUS expression .)
-    CLOSE_PARENT    reduce using rule 19 (expression -> expression PLUS expression .)
-
-  ! PLUS            [ shift and go to state 33 ]
-  ! OR              [ shift and go to state 34 ]
-  ! MINUS           [ shift and go to state 35 ]
-
-
-state 51
-
-    (20) expression -> expression OR relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
-
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-    PLUS            reduce using rule 20 (expression -> expression OR relexp .)
-    OR              reduce using rule 20 (expression -> expression OR relexp .)
-    MINUS           reduce using rule 20 (expression -> expression OR relexp .)
-    ID              reduce using rule 20 (expression -> expression OR relexp .)
-    PRINT           reduce using rule 20 (expression -> expression OR relexp .)
-    IF              reduce using rule 20 (expression -> expression OR relexp .)
-    LOOP            reduce using rule 20 (expression -> expression OR relexp .)
-    $end            reduce using rule 20 (expression -> expression OR relexp .)
-    CLOSE_BRACKET   reduce using rule 20 (expression -> expression OR relexp .)
-    OPEN_BRACKET    reduce using rule 20 (expression -> expression OR relexp .)
-    MULT            reduce using rule 20 (expression -> expression OR relexp .)
-    DIV             reduce using rule 20 (expression -> expression OR relexp .)
-    AND             reduce using rule 20 (expression -> expression OR relexp .)
-    CLOSE_PARENT    reduce using rule 20 (expression -> expression OR relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
-
-  ! GT              [ reduce using rule 20 (expression -> expression OR relexp .) ]
-  ! EQ              [ reduce using rule 20 (expression -> expression OR relexp .) ]
-  ! LT              [ reduce using rule 20 (expression -> expression OR relexp .) ]
-
-
-state 52
-
-    (21) expression -> expression MINUS expression .
-    (19) expression -> expression . PLUS expression
-    (20) expression -> expression . OR relexp
-    (21) expression -> expression . MINUS expression
-
-    PLUS            reduce using rule 21 (expression -> expression MINUS expression .)
-    OR              reduce using rule 21 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 21 (expression -> expression MINUS expression .)
-    GT              reduce using rule 21 (expression -> expression MINUS expression .)
-    EQ              reduce using rule 21 (expression -> expression MINUS expression .)
-    LT              reduce using rule 21 (expression -> expression MINUS expression .)
-    ID              reduce using rule 21 (expression -> expression MINUS expression .)
-    PRINT           reduce using rule 21 (expression -> expression MINUS expression .)
-    IF              reduce using rule 21 (expression -> expression MINUS expression .)
-    LOOP            reduce using rule 21 (expression -> expression MINUS expression .)
-    $end            reduce using rule 21 (expression -> expression MINUS expression .)
-    CLOSE_BRACKET   reduce using rule 21 (expression -> expression MINUS expression .)
-    OPEN_BRACKET    reduce using rule 21 (expression -> expression MINUS expression .)
-    MULT            reduce using rule 21 (expression -> expression MINUS expression .)
-    DIV             reduce using rule 21 (expression -> expression MINUS expression .)
-    AND             reduce using rule 21 (expression -> expression MINUS expression .)
-    CLOSE_PARENT    reduce using rule 21 (expression -> expression MINUS expression .)
-
-  ! PLUS            [ shift and go to state 33 ]
-  ! OR              [ shift and go to state 34 ]
-  ! MINUS           [ shift and go to state 35 ]
-
-
-state 53
-
-    (23) term -> term MULT expression .
-    (19) expression -> expression . PLUS expression
-    (20) expression -> expression . OR relexp
-    (21) expression -> expression . MINUS expression
-
-    MULT            reduce using rule 23 (term -> term MULT expression .)
-    DIV             reduce using rule 23 (term -> term MULT expression .)
-    AND             reduce using rule 23 (term -> term MULT expression .)
-    PLUS            reduce using rule 23 (term -> term MULT expression .)
-    OR              reduce using rule 23 (term -> term MULT expression .)
-    MINUS           reduce using rule 23 (term -> term MULT expression .)
-    GT              reduce using rule 23 (term -> term MULT expression .)
-    EQ              reduce using rule 23 (term -> term MULT expression .)
-    LT              reduce using rule 23 (term -> term MULT expression .)
-    ID              reduce using rule 23 (term -> term MULT expression .)
-    PRINT           reduce using rule 23 (term -> term MULT expression .)
-    IF              reduce using rule 23 (term -> term MULT expression .)
-    LOOP            reduce using rule 23 (term -> term MULT expression .)
-    $end            reduce using rule 23 (term -> term MULT expression .)
-    CLOSE_BRACKET   reduce using rule 23 (term -> term MULT expression .)
-    OPEN_BRACKET    reduce using rule 23 (term -> term MULT expression .)
-    CLOSE_PARENT    reduce using rule 23 (term -> term MULT expression .)
-
-  ! PLUS            [ shift and go to state 33 ]
-  ! OR              [ shift and go to state 34 ]
-  ! MINUS           [ shift and go to state 35 ]
-
-
-state 54
-
-    (24) term -> term DIV expression .
-    (19) expression -> expression . PLUS expression
-    (20) expression -> expression . OR relexp
-    (21) expression -> expression . MINUS expression
-
-    MULT            reduce using rule 24 (term -> term DIV expression .)
-    DIV             reduce using rule 24 (term -> term DIV expression .)
-    AND             reduce using rule 24 (term -> term DIV expression .)
-    PLUS            reduce using rule 24 (term -> term DIV expression .)
-    OR              reduce using rule 24 (term -> term DIV expression .)
-    MINUS           reduce using rule 24 (term -> term DIV expression .)
-    GT              reduce using rule 24 (term -> term DIV expression .)
-    EQ              reduce using rule 24 (term -> term DIV expression .)
-    LT              reduce using rule 24 (term -> term DIV expression .)
-    ID              reduce using rule 24 (term -> term DIV expression .)
-    PRINT           reduce using rule 24 (term -> term DIV expression .)
-    IF              reduce using rule 24 (term -> term DIV expression .)
-    LOOP            reduce using rule 24 (term -> term DIV expression .)
-    $end            reduce using rule 24 (term -> term DIV expression .)
-    CLOSE_BRACKET   reduce using rule 24 (term -> term DIV expression .)
-    OPEN_BRACKET    reduce using rule 24 (term -> term DIV expression .)
-    CLOSE_PARENT    reduce using rule 24 (term -> term DIV expression .)
-
-  ! PLUS            [ shift and go to state 33 ]
-  ! OR              [ shift and go to state 34 ]
-  ! MINUS           [ shift and go to state 35 ]
-
-
-state 55
-
-    (25) term -> term AND relexp .
-    (16) relexp -> relexp . GT relexp
-    (17) relexp -> relexp . EQ relexp
-    (18) relexp -> relexp . LT relexp
-
-  ! shift/reduce conflict for GT resolved as shift
-  ! shift/reduce conflict for EQ resolved as shift
-  ! shift/reduce conflict for LT resolved as shift
-    MULT            reduce using rule 25 (term -> term AND relexp .)
-    DIV             reduce using rule 25 (term -> term AND relexp .)
-    AND             reduce using rule 25 (term -> term AND relexp .)
-    PLUS            reduce using rule 25 (term -> term AND relexp .)
-    OR              reduce using rule 25 (term -> term AND relexp .)
-    MINUS           reduce using rule 25 (term -> term AND relexp .)
-    ID              reduce using rule 25 (term -> term AND relexp .)
-    PRINT           reduce using rule 25 (term -> term AND relexp .)
-    IF              reduce using rule 25 (term -> term AND relexp .)
-    LOOP            reduce using rule 25 (term -> term AND relexp .)
-    $end            reduce using rule 25 (term -> term AND relexp .)
-    CLOSE_BRACKET   reduce using rule 25 (term -> term AND relexp .)
-    OPEN_BRACKET    reduce using rule 25 (term -> term AND relexp .)
-    CLOSE_PARENT    reduce using rule 25 (term -> term AND relexp .)
-    GT              shift and go to state 30
-    EQ              shift and go to state 31
-    LT              shift and go to state 32
-
-  ! GT              [ reduce using rule 25 (term -> term AND relexp .) ]
-  ! EQ              [ reduce using rule 25 (term -> term AND relexp .) ]
-  ! LT              [ reduce using rule 25 (term -> term AND relexp .) ]
-
-
-state 56
-
-    (33) factor -> OPEN_PARENT relexp CLOSE_PARENT .
-
-    MULT            reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    DIV             reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    AND             reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    PLUS            reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    OR              reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    MINUS           reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    GT              reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    EQ              reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    LT              reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    ID              reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    PRINT           reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    IF              reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    LOOP            reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    $end            reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    CLOSE_BRACKET   reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    OPEN_BRACKET    reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-    CLOSE_PARENT    reduce using rule 33 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
-
-
-state 57
-
-    (7) if -> IF relexp OPEN_BRACKET stmts . CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> IF relexp OPEN_BRACKET stmts . CLOSE_BRACKET
-
-    CLOSE_BRACKET   shift and go to state 61
-
-
-state 58
-
-    (9) if -> IF error OPEN_BRACKET stmts . CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> IF error OPEN_BRACKET stmts . CLOSE_BRACKET
-
-    CLOSE_BRACKET   shift and go to state 62
-
-
-state 59
-
-    (11) loop -> LOOP relexp OPEN_BRACKET stmts . CLOSE_BRACKET
-
-    CLOSE_BRACKET   shift and go to state 63
-
-
-state 60
-
-    (12) loop -> LOOP error OPEN_BRACKET stmts . CLOSE_BRACKET
-
-    CLOSE_BRACKET   shift and go to state 64
-
-
-state 61
-
-    (7) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET . ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .
-
-    ELSE            shift and go to state 65
-    ID              reduce using rule 8 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    PRINT           reduce using rule 8 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    IF              reduce using rule 8 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    LOOP            reduce using rule 8 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    $end            reduce using rule 8 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    CLOSE_BRACKET   reduce using rule 8 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-
-
-state 62
-
-    (9) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET . ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .
-
-    ELSE            shift and go to state 66
-    ID              reduce using rule 10 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    PRINT           reduce using rule 10 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    IF              reduce using rule 10 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    LOOP            reduce using rule 10 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    $end            reduce using rule 10 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    CLOSE_BRACKET   reduce using rule 10 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
-
-
-state 63
-
-    (11) loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .
-
-    ID              reduce using rule 11 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    PRINT           reduce using rule 11 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    IF              reduce using rule 11 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    LOOP            reduce using rule 11 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    $end            reduce using rule 11 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-    CLOSE_BRACKET   reduce using rule 11 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
-
-
-state 64
-
-    (12) loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .
-
-    ID              reduce using rule 12 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    PRINT           reduce using rule 12 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    IF              reduce using rule 12 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    LOOP            reduce using rule 12 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    $end            reduce using rule 12 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
-    CLOSE_BRACKET   reduce using rule 12 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
-
-
-state 65
-
-    (7) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE . OPEN_BRACKET stmts CLOSE_BRACKET
-
-    OPEN_BRACKET    shift and go to state 67
-
-
-state 66
-
-    (9) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE . OPEN_BRACKET stmts CLOSE_BRACKET
-
-    OPEN_BRACKET    shift and go to state 68
-
-
-state 67
-
-    (7) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET . stmts CLOSE_BRACKET
+    (13) if -> IF relexp OPEN_BRACKET . stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> IF relexp OPEN_BRACKET . stmts CLOSE_BRACKET
     (1) stmts -> . stmt stmts
     (2) stmts -> . empty
     (3) stmt -> . assign
     (4) stmt -> . out
     (5) stmt -> . if
     (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
 
-    CLOSE_BRACKET   reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
+
+    stmts                          shift and go to state 67
+    stmt                           shift and go to state 2
+    empty                          shift and go to state 3
+    assign                         shift and go to state 4
+    out                            shift and go to state 5
+    if                             shift and go to state 6
+    loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
+
+state 49
+
+    (15) if -> IF error OPEN_BRACKET . stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> IF error OPEN_BRACKET . stmts CLOSE_BRACKET
+    (1) stmts -> . stmt stmts
+    (2) stmts -> . empty
+    (3) stmt -> . assign
+    (4) stmt -> . out
+    (5) stmt -> . if
+    (6) stmt -> . loop
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
+
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
+
+    stmts                          shift and go to state 68
+    stmt                           shift and go to state 2
+    empty                          shift and go to state 3
+    assign                         shift and go to state 4
+    out                            shift and go to state 5
+    if                             shift and go to state 6
+    loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
+
+state 50
+
+    (17) loop -> LOOP relexp OPEN_BRACKET . stmts CLOSE_BRACKET
+    (1) stmts -> . stmt stmts
+    (2) stmts -> . empty
+    (3) stmt -> . assign
+    (4) stmt -> . out
+    (5) stmt -> . if
+    (6) stmt -> . loop
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
+
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
 
     stmts                          shift and go to state 69
     stmt                           shift and go to state 2
@@ -1729,31 +1434,35 @@ state 67
     out                            shift and go to state 5
     if                             shift and go to state 6
     loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
 
-state 68
+state 51
 
-    (9) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET . stmts CLOSE_BRACKET
+    (18) loop -> LOOP error OPEN_BRACKET . stmts CLOSE_BRACKET
     (1) stmts -> . stmt stmts
     (2) stmts -> . empty
     (3) stmt -> . assign
     (4) stmt -> . out
     (5) stmt -> . if
     (6) stmt -> . loop
-    (34) empty -> .
-    (13) assign -> . ID ASSIGNER relexp
-    (14) out -> . PRINT relexp
-    (7) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (8) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (9) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
-    (10) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
-    (11) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
-    (12) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
 
-    CLOSE_BRACKET   reduce using rule 34 (empty -> .)
-    ID              shift and go to state 8
-    PRINT           shift and go to state 9
-    IF              shift and go to state 10
-    LOOP            shift and go to state 11
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
 
     stmts                          shift and go to state 70
     stmt                           shift and go to state 2
@@ -1762,68 +1471,819 @@ state 68
     out                            shift and go to state 5
     if                             shift and go to state 6
     loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
+
+state 52
+
+    (8) funcdec -> FUNCTION ID params . OPEN_BRACKET stmts CLOSE_BRACKET
+
+    OPEN_BRACKET    shift and go to state 71
+
+
+state 53
+
+    (9) params -> OPEN_PARENT . args CLOSE_PARENT
+    (10) params -> OPEN_PARENT . CLOSE_PARENT
+    (11) args -> . args COMMA ID
+    (12) args -> . ID
+
+    CLOSE_PARENT    shift and go to state 73
+    ID              shift and go to state 74
+
+    args                           shift and go to state 72
+
+state 54
+
+    (22) relexp -> relexp GT relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    ID              reduce using rule 22 (relexp -> relexp GT relexp .)
+    PRINT           reduce using rule 22 (relexp -> relexp GT relexp .)
+    IF              reduce using rule 22 (relexp -> relexp GT relexp .)
+    LOOP            reduce using rule 22 (relexp -> relexp GT relexp .)
+    FUNCTION        reduce using rule 22 (relexp -> relexp GT relexp .)
+    $end            reduce using rule 22 (relexp -> relexp GT relexp .)
+    CLOSE_BRACKET   reduce using rule 22 (relexp -> relexp GT relexp .)
+    OPEN_BRACKET    reduce using rule 22 (relexp -> relexp GT relexp .)
+    PLUS            reduce using rule 22 (relexp -> relexp GT relexp .)
+    OR              reduce using rule 22 (relexp -> relexp GT relexp .)
+    MINUS           reduce using rule 22 (relexp -> relexp GT relexp .)
+    MULT            reduce using rule 22 (relexp -> relexp GT relexp .)
+    DIV             reduce using rule 22 (relexp -> relexp GT relexp .)
+    AND             reduce using rule 22 (relexp -> relexp GT relexp .)
+    CLOSE_PARENT    reduce using rule 22 (relexp -> relexp GT relexp .)
+    COMMA           reduce using rule 22 (relexp -> relexp GT relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+  ! GT              [ reduce using rule 22 (relexp -> relexp GT relexp .) ]
+  ! EQ              [ reduce using rule 22 (relexp -> relexp GT relexp .) ]
+  ! LT              [ reduce using rule 22 (relexp -> relexp GT relexp .) ]
+
+
+state 55
+
+    (23) relexp -> relexp EQ relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    ID              reduce using rule 23 (relexp -> relexp EQ relexp .)
+    PRINT           reduce using rule 23 (relexp -> relexp EQ relexp .)
+    IF              reduce using rule 23 (relexp -> relexp EQ relexp .)
+    LOOP            reduce using rule 23 (relexp -> relexp EQ relexp .)
+    FUNCTION        reduce using rule 23 (relexp -> relexp EQ relexp .)
+    $end            reduce using rule 23 (relexp -> relexp EQ relexp .)
+    CLOSE_BRACKET   reduce using rule 23 (relexp -> relexp EQ relexp .)
+    OPEN_BRACKET    reduce using rule 23 (relexp -> relexp EQ relexp .)
+    PLUS            reduce using rule 23 (relexp -> relexp EQ relexp .)
+    OR              reduce using rule 23 (relexp -> relexp EQ relexp .)
+    MINUS           reduce using rule 23 (relexp -> relexp EQ relexp .)
+    MULT            reduce using rule 23 (relexp -> relexp EQ relexp .)
+    DIV             reduce using rule 23 (relexp -> relexp EQ relexp .)
+    AND             reduce using rule 23 (relexp -> relexp EQ relexp .)
+    CLOSE_PARENT    reduce using rule 23 (relexp -> relexp EQ relexp .)
+    COMMA           reduce using rule 23 (relexp -> relexp EQ relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+  ! GT              [ reduce using rule 23 (relexp -> relexp EQ relexp .) ]
+  ! EQ              [ reduce using rule 23 (relexp -> relexp EQ relexp .) ]
+  ! LT              [ reduce using rule 23 (relexp -> relexp EQ relexp .) ]
+
+
+state 56
+
+    (24) relexp -> relexp LT relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    ID              reduce using rule 24 (relexp -> relexp LT relexp .)
+    PRINT           reduce using rule 24 (relexp -> relexp LT relexp .)
+    IF              reduce using rule 24 (relexp -> relexp LT relexp .)
+    LOOP            reduce using rule 24 (relexp -> relexp LT relexp .)
+    FUNCTION        reduce using rule 24 (relexp -> relexp LT relexp .)
+    $end            reduce using rule 24 (relexp -> relexp LT relexp .)
+    CLOSE_BRACKET   reduce using rule 24 (relexp -> relexp LT relexp .)
+    OPEN_BRACKET    reduce using rule 24 (relexp -> relexp LT relexp .)
+    PLUS            reduce using rule 24 (relexp -> relexp LT relexp .)
+    OR              reduce using rule 24 (relexp -> relexp LT relexp .)
+    MINUS           reduce using rule 24 (relexp -> relexp LT relexp .)
+    MULT            reduce using rule 24 (relexp -> relexp LT relexp .)
+    DIV             reduce using rule 24 (relexp -> relexp LT relexp .)
+    AND             reduce using rule 24 (relexp -> relexp LT relexp .)
+    CLOSE_PARENT    reduce using rule 24 (relexp -> relexp LT relexp .)
+    COMMA           reduce using rule 24 (relexp -> relexp LT relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+  ! GT              [ reduce using rule 24 (relexp -> relexp LT relexp .) ]
+  ! EQ              [ reduce using rule 24 (relexp -> relexp LT relexp .) ]
+  ! LT              [ reduce using rule 24 (relexp -> relexp LT relexp .) ]
+
+
+state 57
+
+    (25) expression -> expression PLUS expression .
+    (25) expression -> expression . PLUS expression
+    (26) expression -> expression . OR relexp
+    (27) expression -> expression . MINUS expression
+
+    PLUS            reduce using rule 25 (expression -> expression PLUS expression .)
+    OR              reduce using rule 25 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 25 (expression -> expression PLUS expression .)
+    GT              reduce using rule 25 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 25 (expression -> expression PLUS expression .)
+    LT              reduce using rule 25 (expression -> expression PLUS expression .)
+    ID              reduce using rule 25 (expression -> expression PLUS expression .)
+    PRINT           reduce using rule 25 (expression -> expression PLUS expression .)
+    IF              reduce using rule 25 (expression -> expression PLUS expression .)
+    LOOP            reduce using rule 25 (expression -> expression PLUS expression .)
+    FUNCTION        reduce using rule 25 (expression -> expression PLUS expression .)
+    $end            reduce using rule 25 (expression -> expression PLUS expression .)
+    CLOSE_BRACKET   reduce using rule 25 (expression -> expression PLUS expression .)
+    OPEN_BRACKET    reduce using rule 25 (expression -> expression PLUS expression .)
+    MULT            reduce using rule 25 (expression -> expression PLUS expression .)
+    DIV             reduce using rule 25 (expression -> expression PLUS expression .)
+    AND             reduce using rule 25 (expression -> expression PLUS expression .)
+    CLOSE_PARENT    reduce using rule 25 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 25 (expression -> expression PLUS expression .)
+
+  ! PLUS            [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
+
+state 58
+
+    (26) expression -> expression OR relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    PLUS            reduce using rule 26 (expression -> expression OR relexp .)
+    OR              reduce using rule 26 (expression -> expression OR relexp .)
+    MINUS           reduce using rule 26 (expression -> expression OR relexp .)
+    ID              reduce using rule 26 (expression -> expression OR relexp .)
+    PRINT           reduce using rule 26 (expression -> expression OR relexp .)
+    IF              reduce using rule 26 (expression -> expression OR relexp .)
+    LOOP            reduce using rule 26 (expression -> expression OR relexp .)
+    FUNCTION        reduce using rule 26 (expression -> expression OR relexp .)
+    $end            reduce using rule 26 (expression -> expression OR relexp .)
+    CLOSE_BRACKET   reduce using rule 26 (expression -> expression OR relexp .)
+    OPEN_BRACKET    reduce using rule 26 (expression -> expression OR relexp .)
+    MULT            reduce using rule 26 (expression -> expression OR relexp .)
+    DIV             reduce using rule 26 (expression -> expression OR relexp .)
+    AND             reduce using rule 26 (expression -> expression OR relexp .)
+    CLOSE_PARENT    reduce using rule 26 (expression -> expression OR relexp .)
+    COMMA           reduce using rule 26 (expression -> expression OR relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+  ! GT              [ reduce using rule 26 (expression -> expression OR relexp .) ]
+  ! EQ              [ reduce using rule 26 (expression -> expression OR relexp .) ]
+  ! LT              [ reduce using rule 26 (expression -> expression OR relexp .) ]
+
+
+state 59
+
+    (27) expression -> expression MINUS expression .
+    (25) expression -> expression . PLUS expression
+    (26) expression -> expression . OR relexp
+    (27) expression -> expression . MINUS expression
+
+    PLUS            reduce using rule 27 (expression -> expression MINUS expression .)
+    OR              reduce using rule 27 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 27 (expression -> expression MINUS expression .)
+    GT              reduce using rule 27 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 27 (expression -> expression MINUS expression .)
+    LT              reduce using rule 27 (expression -> expression MINUS expression .)
+    ID              reduce using rule 27 (expression -> expression MINUS expression .)
+    PRINT           reduce using rule 27 (expression -> expression MINUS expression .)
+    IF              reduce using rule 27 (expression -> expression MINUS expression .)
+    LOOP            reduce using rule 27 (expression -> expression MINUS expression .)
+    FUNCTION        reduce using rule 27 (expression -> expression MINUS expression .)
+    $end            reduce using rule 27 (expression -> expression MINUS expression .)
+    CLOSE_BRACKET   reduce using rule 27 (expression -> expression MINUS expression .)
+    OPEN_BRACKET    reduce using rule 27 (expression -> expression MINUS expression .)
+    MULT            reduce using rule 27 (expression -> expression MINUS expression .)
+    DIV             reduce using rule 27 (expression -> expression MINUS expression .)
+    AND             reduce using rule 27 (expression -> expression MINUS expression .)
+    CLOSE_PARENT    reduce using rule 27 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 27 (expression -> expression MINUS expression .)
+
+  ! PLUS            [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
+
+state 60
+
+    (29) term -> term MULT expression .
+    (25) expression -> expression . PLUS expression
+    (26) expression -> expression . OR relexp
+    (27) expression -> expression . MINUS expression
+
+    MULT            reduce using rule 29 (term -> term MULT expression .)
+    DIV             reduce using rule 29 (term -> term MULT expression .)
+    AND             reduce using rule 29 (term -> term MULT expression .)
+    PLUS            reduce using rule 29 (term -> term MULT expression .)
+    OR              reduce using rule 29 (term -> term MULT expression .)
+    MINUS           reduce using rule 29 (term -> term MULT expression .)
+    GT              reduce using rule 29 (term -> term MULT expression .)
+    EQ              reduce using rule 29 (term -> term MULT expression .)
+    LT              reduce using rule 29 (term -> term MULT expression .)
+    ID              reduce using rule 29 (term -> term MULT expression .)
+    PRINT           reduce using rule 29 (term -> term MULT expression .)
+    IF              reduce using rule 29 (term -> term MULT expression .)
+    LOOP            reduce using rule 29 (term -> term MULT expression .)
+    FUNCTION        reduce using rule 29 (term -> term MULT expression .)
+    $end            reduce using rule 29 (term -> term MULT expression .)
+    CLOSE_BRACKET   reduce using rule 29 (term -> term MULT expression .)
+    OPEN_BRACKET    reduce using rule 29 (term -> term MULT expression .)
+    CLOSE_PARENT    reduce using rule 29 (term -> term MULT expression .)
+    COMMA           reduce using rule 29 (term -> term MULT expression .)
+
+  ! PLUS            [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
+
+state 61
+
+    (30) term -> term DIV expression .
+    (25) expression -> expression . PLUS expression
+    (26) expression -> expression . OR relexp
+    (27) expression -> expression . MINUS expression
+
+    MULT            reduce using rule 30 (term -> term DIV expression .)
+    DIV             reduce using rule 30 (term -> term DIV expression .)
+    AND             reduce using rule 30 (term -> term DIV expression .)
+    PLUS            reduce using rule 30 (term -> term DIV expression .)
+    OR              reduce using rule 30 (term -> term DIV expression .)
+    MINUS           reduce using rule 30 (term -> term DIV expression .)
+    GT              reduce using rule 30 (term -> term DIV expression .)
+    EQ              reduce using rule 30 (term -> term DIV expression .)
+    LT              reduce using rule 30 (term -> term DIV expression .)
+    ID              reduce using rule 30 (term -> term DIV expression .)
+    PRINT           reduce using rule 30 (term -> term DIV expression .)
+    IF              reduce using rule 30 (term -> term DIV expression .)
+    LOOP            reduce using rule 30 (term -> term DIV expression .)
+    FUNCTION        reduce using rule 30 (term -> term DIV expression .)
+    $end            reduce using rule 30 (term -> term DIV expression .)
+    CLOSE_BRACKET   reduce using rule 30 (term -> term DIV expression .)
+    OPEN_BRACKET    reduce using rule 30 (term -> term DIV expression .)
+    CLOSE_PARENT    reduce using rule 30 (term -> term DIV expression .)
+    COMMA           reduce using rule 30 (term -> term DIV expression .)
+
+  ! PLUS            [ shift and go to state 36 ]
+  ! OR              [ shift and go to state 37 ]
+  ! MINUS           [ shift and go to state 38 ]
+
+
+state 62
+
+    (31) term -> term AND relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    MULT            reduce using rule 31 (term -> term AND relexp .)
+    DIV             reduce using rule 31 (term -> term AND relexp .)
+    AND             reduce using rule 31 (term -> term AND relexp .)
+    PLUS            reduce using rule 31 (term -> term AND relexp .)
+    OR              reduce using rule 31 (term -> term AND relexp .)
+    MINUS           reduce using rule 31 (term -> term AND relexp .)
+    ID              reduce using rule 31 (term -> term AND relexp .)
+    PRINT           reduce using rule 31 (term -> term AND relexp .)
+    IF              reduce using rule 31 (term -> term AND relexp .)
+    LOOP            reduce using rule 31 (term -> term AND relexp .)
+    FUNCTION        reduce using rule 31 (term -> term AND relexp .)
+    $end            reduce using rule 31 (term -> term AND relexp .)
+    CLOSE_BRACKET   reduce using rule 31 (term -> term AND relexp .)
+    OPEN_BRACKET    reduce using rule 31 (term -> term AND relexp .)
+    CLOSE_PARENT    reduce using rule 31 (term -> term AND relexp .)
+    COMMA           reduce using rule 31 (term -> term AND relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+  ! GT              [ reduce using rule 31 (term -> term AND relexp .) ]
+  ! EQ              [ reduce using rule 31 (term -> term AND relexp .) ]
+  ! LT              [ reduce using rule 31 (term -> term AND relexp .) ]
+
+
+state 63
+
+    (41) callparams -> OPEN_PARENT callargs . CLOSE_PARENT
+    (43) callargs -> callargs . COMMA relexp
+
+    CLOSE_PARENT    shift and go to state 75
+    COMMA           shift and go to state 76
+
+
+state 64
+
+    (42) callparams -> OPEN_PARENT CLOSE_PARENT .
+
+    MULT            reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    DIV             reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    AND             reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    PLUS            reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    OR              reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    MINUS           reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    GT              reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    EQ              reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    LT              reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    ID              reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    PRINT           reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    IF              reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    LOOP            reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    FUNCTION        reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    $end            reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    CLOSE_BRACKET   reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    OPEN_BRACKET    reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    CLOSE_PARENT    reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+    COMMA           reduce using rule 42 (callparams -> OPEN_PARENT CLOSE_PARENT .)
+
+
+state 65
+
+    (44) callargs -> relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+    CLOSE_PARENT    reduce using rule 44 (callargs -> relexp .)
+    COMMA           reduce using rule 44 (callargs -> relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+
+state 66
+
+    (39) factor -> OPEN_PARENT relexp CLOSE_PARENT .
+
+    MULT            reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    DIV             reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    AND             reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    PLUS            reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    OR              reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    MINUS           reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    GT              reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    EQ              reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    LT              reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    ID              reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    PRINT           reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    IF              reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    LOOP            reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    FUNCTION        reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    $end            reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    CLOSE_BRACKET   reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    OPEN_BRACKET    reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    CLOSE_PARENT    reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+    COMMA           reduce using rule 39 (factor -> OPEN_PARENT relexp CLOSE_PARENT .)
+
+
+state 67
+
+    (13) if -> IF relexp OPEN_BRACKET stmts . CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> IF relexp OPEN_BRACKET stmts . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 77
+
+
+state 68
+
+    (15) if -> IF error OPEN_BRACKET stmts . CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> IF error OPEN_BRACKET stmts . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 78
+
 
 state 69
 
-    (7) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts . CLOSE_BRACKET
+    (17) loop -> LOOP relexp OPEN_BRACKET stmts . CLOSE_BRACKET
 
-    CLOSE_BRACKET   shift and go to state 71
+    CLOSE_BRACKET   shift and go to state 79
 
 
 state 70
 
-    (9) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts . CLOSE_BRACKET
+    (18) loop -> LOOP error OPEN_BRACKET stmts . CLOSE_BRACKET
 
-    CLOSE_BRACKET   shift and go to state 72
+    CLOSE_BRACKET   shift and go to state 80
 
 
 state 71
 
-    (7) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .
+    (8) funcdec -> FUNCTION ID params OPEN_BRACKET . stmts CLOSE_BRACKET
+    (1) stmts -> . stmt stmts
+    (2) stmts -> . empty
+    (3) stmt -> . assign
+    (4) stmt -> . out
+    (5) stmt -> . if
+    (6) stmt -> . loop
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
 
-    ID              reduce using rule 7 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    PRINT           reduce using rule 7 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    IF              reduce using rule 7 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    LOOP            reduce using rule 7 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    $end            reduce using rule 7 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    CLOSE_BRACKET   reduce using rule 7 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
 
+    stmts                          shift and go to state 81
+    stmt                           shift and go to state 2
+    empty                          shift and go to state 3
+    assign                         shift and go to state 4
+    out                            shift and go to state 5
+    if                             shift and go to state 6
+    loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
 
 state 72
 
-    (9) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .
+    (9) params -> OPEN_PARENT args . CLOSE_PARENT
+    (11) args -> args . COMMA ID
 
-    ID              reduce using rule 9 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    PRINT           reduce using rule 9 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    IF              reduce using rule 9 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    LOOP            reduce using rule 9 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    $end            reduce using rule 9 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
-    CLOSE_BRACKET   reduce using rule 9 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_PARENT    shift and go to state 82
+    COMMA           shift and go to state 83
+
+
+state 73
+
+    (10) params -> OPEN_PARENT CLOSE_PARENT .
+
+    OPEN_BRACKET    reduce using rule 10 (params -> OPEN_PARENT CLOSE_PARENT .)
+
+
+state 74
+
+    (12) args -> ID .
+
+    CLOSE_PARENT    reduce using rule 12 (args -> ID .)
+    COMMA           reduce using rule 12 (args -> ID .)
+
+
+state 75
+
+    (41) callparams -> OPEN_PARENT callargs CLOSE_PARENT .
+
+    MULT            reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    DIV             reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    AND             reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    PLUS            reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    OR              reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    MINUS           reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    GT              reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    EQ              reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    LT              reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    ID              reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    PRINT           reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    IF              reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    LOOP            reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    FUNCTION        reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    $end            reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    CLOSE_BRACKET   reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    OPEN_BRACKET    reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    CLOSE_PARENT    reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+    COMMA           reduce using rule 41 (callparams -> OPEN_PARENT callargs CLOSE_PARENT .)
+
+
+state 76
+
+    (43) callargs -> callargs COMMA . relexp
+    (21) relexp -> . expression
+    (22) relexp -> . relexp GT relexp
+    (23) relexp -> . relexp EQ relexp
+    (24) relexp -> . relexp LT relexp
+    (25) expression -> . expression PLUS expression
+    (26) expression -> . expression OR relexp
+    (27) expression -> . expression MINUS expression
+    (28) expression -> . term
+    (29) term -> . term MULT expression
+    (30) term -> . term DIV expression
+    (31) term -> . term AND relexp
+    (32) term -> . factor
+    (33) factor -> . NUMBER
+    (34) factor -> . ID
+    (35) factor -> . INPUT
+    (36) factor -> . PLUS expression
+    (37) factor -> . MINUS expression
+    (38) factor -> . NOT relexp
+    (39) factor -> . OPEN_PARENT relexp CLOSE_PARENT
+    (40) factor -> . ID callparams
+
+    NUMBER          shift and go to state 22
+    ID              shift and go to state 23
+    INPUT           shift and go to state 24
+    PLUS            shift and go to state 18
+    MINUS           shift and go to state 19
+    NOT             shift and go to state 25
+    OPEN_PARENT     shift and go to state 26
+
+    relexp                         shift and go to state 84
+    expression                     shift and go to state 17
+    term                           shift and go to state 20
+    factor                         shift and go to state 21
+
+state 77
+
+    (13) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET . ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .
+
+    ELSE            shift and go to state 85
+    ID              reduce using rule 14 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    PRINT           reduce using rule 14 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    IF              reduce using rule 14 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    LOOP            reduce using rule 14 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    FUNCTION        reduce using rule 14 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    $end            reduce using rule 14 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 14 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+
+
+state 78
+
+    (15) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET . ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .
+
+    ELSE            shift and go to state 86
+    ID              reduce using rule 16 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    PRINT           reduce using rule 16 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    IF              reduce using rule 16 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    LOOP            reduce using rule 16 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    FUNCTION        reduce using rule 16 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    $end            reduce using rule 16 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 16 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET .)
+
+
+state 79
+
+    (17) loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .
+
+    ID              reduce using rule 17 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    PRINT           reduce using rule 17 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    IF              reduce using rule 17 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    LOOP            reduce using rule 17 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    FUNCTION        reduce using rule 17 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    $end            reduce using rule 17 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 17 (loop -> LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET .)
+
+
+state 80
+
+    (18) loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .
+
+    ID              reduce using rule 18 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    PRINT           reduce using rule 18 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    IF              reduce using rule 18 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    LOOP            reduce using rule 18 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    FUNCTION        reduce using rule 18 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    $end            reduce using rule 18 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 18 (loop -> LOOP error OPEN_BRACKET stmts CLOSE_BRACKET .)
+
+
+state 81
+
+    (8) funcdec -> FUNCTION ID params OPEN_BRACKET stmts . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 87
+
+
+state 82
+
+    (9) params -> OPEN_PARENT args CLOSE_PARENT .
+
+    OPEN_BRACKET    reduce using rule 9 (params -> OPEN_PARENT args CLOSE_PARENT .)
+
+
+state 83
+
+    (11) args -> args COMMA . ID
+
+    ID              shift and go to state 88
+
+
+state 84
+
+    (43) callargs -> callargs COMMA relexp .
+    (22) relexp -> relexp . GT relexp
+    (23) relexp -> relexp . EQ relexp
+    (24) relexp -> relexp . LT relexp
+
+    CLOSE_PARENT    reduce using rule 43 (callargs -> callargs COMMA relexp .)
+    COMMA           reduce using rule 43 (callargs -> callargs COMMA relexp .)
+    GT              shift and go to state 33
+    EQ              shift and go to state 34
+    LT              shift and go to state 35
+
+
+state 85
+
+    (13) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE . OPEN_BRACKET stmts CLOSE_BRACKET
+
+    OPEN_BRACKET    shift and go to state 89
+
+
+state 86
+
+    (15) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE . OPEN_BRACKET stmts CLOSE_BRACKET
+
+    OPEN_BRACKET    shift and go to state 90
+
+
+state 87
+
+    (8) funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .
+
+    ID              reduce using rule 8 (funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .)
+    PRINT           reduce using rule 8 (funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .)
+    IF              reduce using rule 8 (funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .)
+    LOOP            reduce using rule 8 (funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .)
+    FUNCTION        reduce using rule 8 (funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .)
+    $end            reduce using rule 8 (funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 8 (funcdec -> FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET .)
+
+
+state 88
+
+    (11) args -> args COMMA ID .
+
+    CLOSE_PARENT    reduce using rule 11 (args -> args COMMA ID .)
+    COMMA           reduce using rule 11 (args -> args COMMA ID .)
+
+
+state 89
+
+    (13) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET . stmts CLOSE_BRACKET
+    (1) stmts -> . stmt stmts
+    (2) stmts -> . empty
+    (3) stmt -> . assign
+    (4) stmt -> . out
+    (5) stmt -> . if
+    (6) stmt -> . loop
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
+
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
+
+    stmts                          shift and go to state 91
+    stmt                           shift and go to state 2
+    empty                          shift and go to state 3
+    assign                         shift and go to state 4
+    out                            shift and go to state 5
+    if                             shift and go to state 6
+    loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
+
+state 90
+
+    (15) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET . stmts CLOSE_BRACKET
+    (1) stmts -> . stmt stmts
+    (2) stmts -> . empty
+    (3) stmt -> . assign
+    (4) stmt -> . out
+    (5) stmt -> . if
+    (6) stmt -> . loop
+    (7) stmt -> . funcdec
+    (45) empty -> .
+    (19) assign -> . ID ASSIGNER relexp
+    (20) out -> . PRINT relexp
+    (13) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (14) if -> . IF relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (15) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET
+    (16) if -> . IF error OPEN_BRACKET stmts CLOSE_BRACKET
+    (17) loop -> . LOOP relexp OPEN_BRACKET stmts CLOSE_BRACKET
+    (18) loop -> . LOOP error OPEN_BRACKET stmts CLOSE_BRACKET
+    (8) funcdec -> . FUNCTION ID params OPEN_BRACKET stmts CLOSE_BRACKET
+
+    CLOSE_BRACKET   reduce using rule 45 (empty -> .)
+    ID              shift and go to state 9
+    PRINT           shift and go to state 10
+    IF              shift and go to state 11
+    LOOP            shift and go to state 12
+    FUNCTION        shift and go to state 13
+
+    stmts                          shift and go to state 92
+    stmt                           shift and go to state 2
+    empty                          shift and go to state 3
+    assign                         shift and go to state 4
+    out                            shift and go to state 5
+    if                             shift and go to state 6
+    loop                           shift and go to state 7
+    funcdec                        shift and go to state 8
+
+state 91
+
+    (13) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 93
+
+
+state 92
+
+    (15) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts . CLOSE_BRACKET
+
+    CLOSE_BRACKET   shift and go to state 94
+
+
+state 93
+
+    (13) if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .
+
+    ID              reduce using rule 13 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    PRINT           reduce using rule 13 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    IF              reduce using rule 13 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    LOOP            reduce using rule 13 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    FUNCTION        reduce using rule 13 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    $end            reduce using rule 13 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 13 (if -> IF relexp OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+
+
+state 94
+
+    (15) if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .
+
+    ID              reduce using rule 15 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    PRINT           reduce using rule 15 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    IF              reduce using rule 15 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    LOOP            reduce using rule 15 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    FUNCTION        reduce using rule 15 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    $end            reduce using rule 15 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
+    CLOSE_BRACKET   reduce using rule 15 (if -> IF error OPEN_BRACKET stmts CLOSE_BRACKET ELSE OPEN_BRACKET stmts CLOSE_BRACKET .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 15 resolved as shift
-WARNING: shift/reduce conflict for OR in state 15 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 15 resolved as shift
-WARNING: shift/reduce conflict for MULT in state 18 resolved as shift
-WARNING: shift/reduce conflict for DIV in state 18 resolved as shift
-WARNING: shift/reduce conflict for AND in state 18 resolved as shift
-WARNING: shift/reduce conflict for GT in state 41 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 41 resolved as shift
-WARNING: shift/reduce conflict for LT in state 41 resolved as shift
-WARNING: shift/reduce conflict for GT in state 47 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 47 resolved as shift
-WARNING: shift/reduce conflict for LT in state 47 resolved as shift
-WARNING: shift/reduce conflict for GT in state 48 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 48 resolved as shift
-WARNING: shift/reduce conflict for LT in state 48 resolved as shift
-WARNING: shift/reduce conflict for GT in state 49 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 49 resolved as shift
-WARNING: shift/reduce conflict for LT in state 49 resolved as shift
-WARNING: shift/reduce conflict for GT in state 51 resolved as shift
-WARNING: shift/reduce conflict for EQ in state 51 resolved as shift
-WARNING: shift/reduce conflict for LT in state 51 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 17 resolved as shift
+WARNING: shift/reduce conflict for OR in state 17 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 17 resolved as shift
+WARNING: shift/reduce conflict for MULT in state 20 resolved as shift
+WARNING: shift/reduce conflict for DIV in state 20 resolved as shift
+WARNING: shift/reduce conflict for AND in state 20 resolved as shift
+WARNING: shift/reduce conflict for GT in state 46 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 46 resolved as shift
+WARNING: shift/reduce conflict for LT in state 46 resolved as shift
+WARNING: shift/reduce conflict for GT in state 54 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 54 resolved as shift
+WARNING: shift/reduce conflict for LT in state 54 resolved as shift
 WARNING: shift/reduce conflict for GT in state 55 resolved as shift
 WARNING: shift/reduce conflict for EQ in state 55 resolved as shift
 WARNING: shift/reduce conflict for LT in state 55 resolved as shift
+WARNING: shift/reduce conflict for GT in state 56 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 56 resolved as shift
+WARNING: shift/reduce conflict for LT in state 56 resolved as shift
+WARNING: shift/reduce conflict for GT in state 58 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 58 resolved as shift
+WARNING: shift/reduce conflict for LT in state 58 resolved as shift
+WARNING: shift/reduce conflict for GT in state 62 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 62 resolved as shift
+WARNING: shift/reduce conflict for LT in state 62 resolved as shift

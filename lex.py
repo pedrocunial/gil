@@ -5,6 +5,7 @@ reserved = {
     'i': 'IF',
     'e': 'ELSE',
     'l': 'LOOP',
+    'f': 'FUNCTION',
     'out': 'PRINT',
     'in': 'INPUT'
 }
@@ -20,7 +21,6 @@ tokens = [
     'OPEN_BRACKET',
     'CLOSE_BRACKET',
     'ID',
-    'COMMENT',
     'ASSIGNER',
     'EQ',
     'LT',
@@ -28,6 +28,7 @@ tokens = [
     'AND',
     'OR',
     'NOT',
+    'COMMA',
 ] + list(reserved.values())
 
 t_PLUS = r'\+'
@@ -45,6 +46,7 @@ t_GT = r'\>'
 t_AND = r'\&'
 t_OR = r'\|'
 t_NOT = r'\!'
+t_COMMA = r'\,'
 
 t_ignore = ' \t'  # ignorar espacos e tabs
 

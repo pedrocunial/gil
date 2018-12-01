@@ -11,6 +11,26 @@ class Node(object):
         raise ValueError('Node class should not be directly evaluated')
 
 
+class FuncDec(Node):
+    def eval(self, st):
+        st.set(self.value, self.children)
+
+
+class FuncCall(Node):
+    def eval(self, st):
+        func_args, func_body = st.get(self.value)
+        if len(func_args) != len(self.children):
+            raise ValueError('Unmatching sizes between defined function args' +
+                             f' and calling args ({len(func_args)} -- ' +
+                             f'{len(self.children)})')
+        inner_st = SymbolTable(father=st)
+        inner_st.set(self.value, None)  # default return value
+        for key, value in zip(func_args, self.children):
+            inner_st.set(key, value.eval(st))
+        func_body.eval(inner_st)
+        return inner_st.get(self.value)
+
+
 class CmdsOp(Node):
     def eval(self, st):
         for child in self.children:
