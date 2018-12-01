@@ -4,7 +4,9 @@ import ply.lex as lex
 reserved = {
     'i': 'IF',
     'e': 'ELSE',
-    'l': 'LOOP'
+    'l': 'LOOP',
+    'out': 'PRINT',
+    'in': 'INPUT'
 }
 
 tokens = [
@@ -22,7 +24,10 @@ tokens = [
     'ASSIGNER',
     'EQ',
     'LT',
-    'GT'
+    'GT',
+    'AND',
+    'OR',
+    'NOT',
 ] + list(reserved.values())
 
 t_PLUS = r'\+'
@@ -34,9 +39,12 @@ t_CLOSE_PARENT = r'\)'
 t_OPEN_BRACKET = r'\{'
 t_CLOSE_BRACKET = r'\}'
 t_ASSIGNER = r'\:='
-t_EQ = '\=='
-t_LT = '\<'
-t_GT = '\>'
+t_EQ = r'\=='
+t_LT = r'\<'
+t_GT = r'\>'
+t_AND = r'\&'
+t_OR = r'\|'
+t_NOT = r'\!'
 
 t_ignore = ' \t'  # ignorar espacos e tabs
 

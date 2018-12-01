@@ -1,5 +1,8 @@
 import ply.yacc as yacc
+import node as nd
+
 from lex import tokens
+from symboltable import SymbolTable
 
 
 precedence = (
@@ -8,17 +11,40 @@ precedence = (
     ('right', 'UPLUS', 'UMINUS'),
 )
 
-variables = {}
+variables = SymbolTable()
+
+
+def p_stmts(p):
+    '''stmts : stmt stmts
+             | empty'''
+    if len(p) == 3:
+        p[0] = nd.CmdsOp(None, [p[1], p[2]])
+
+
+def p_stmt(p):
+    '''stmt : assign
+            | out'''
+    p[0] = p[1]
+
+
+def p_assign(p):
+    'assign : ID ASSIGNER expression'
+    p[0] = nd.BinOp(':=', [p[1], p[3]])
+
+
+def p_out(p):
+    'out : PRINT expression'
+    p[0] = nd.UnOp(p[1], [p[2]])
 
 
 def p_expression_plus(p):
     'expression : expression PLUS term'
-    p[0] = p[1] + p[3]
+    p[0] = nd.BinOp('+', [p[1], p[3]])
 
 
 def p_expression_minus(p):
     'expression : expression MINUS term'
-    p[0] = p[1] - p[3]
+    p[0] = nd.BinOp('-', [p[1], p[3]])
 
 
 def p_expression_term(p):
@@ -28,12 +54,12 @@ def p_expression_term(p):
 
 def p_term_times(p):
     'term : term MULT factor'
-    p[0] = p[1] * p[3]
+    p[0] = nd.BinOp('*', [p[1], p[3]])
 
 
 def p_term_div(p):
     'term : term DIV factor'
-    p[0] = p[1] / p[3]
+    p[0] = nd.BinOp('/', [p[1], p[3]])
 
 
 def p_term_factor(p):
@@ -43,25 +69,23 @@ def p_term_factor(p):
 
 def p_factor_num(p):
     'factor : NUMBER'
-    p[0] = p[1]
+    p[0] = nd.IntVal(p[1], None)
 
 
 def p_factor_id(p):
     'factor : ID'
-    try:
-        p[0] = variables[p[1]]
-    except LookupError:
-        print(f'Undefined variable {p[1]}')
-        p[0] = 0
+    p[0] = nd.VarVal(p[1], None)
+
+
+def p_factor_input(p):
+    'factor : INPUT'
+    p[0] = nd.Input(None, None)
 
 
 def p_factor_sign_num(p):
     '''factor : PLUS expression %prec UPLUS
               | MINUS expression %prec UMINUS'''
-    if p[1] == '+':
-        p[0] = p[2]
-    else:
-        p[0] = -p[2]
+    p[0] = nd.UnOp(p[1], [p[2]])
 
 
 def p_factor_expr(p):
@@ -69,10 +93,8 @@ def p_factor_expr(p):
     p[0] = p[2]
 
 
-def p_assign(p):
-    'assign : ID ASSIGNER expression'
-    print('assign')
-    variables[p[1]] = p[3]
+def p_empty(p):
+    'empty : '
 
 
 # Error rule for syntax errors
@@ -93,4 +115,4 @@ if __name__ == '__main__':
         if not s:
             continue
         result = parser.parse(s)
-        print(result)
+        print(result.eval(variables))

@@ -1,32 +1,18 @@
-from lex import lexer
+from parser import parser, variables
 
 
 # https://www.dabeaz.com/ply/ply.html
 data = '''
 
-x := (3 + 4 * 10 +
-        -20
-           *2)
-i x < 3 {
-    y := 2
-} e {
-    y := x
-}
+# coment xd
 
-i x == y {
-    z := 1
-} e {
-    z := 0
-}
+y := 3
+out y
+
+x := (9 + 4 * 10 + -20  *2)
+out x
+
 '''
 
-lexer.input(data)
-
-# tokenize
-while True:
-    token = lexer.token()
-    if not token:
-        break  # no more input
-    print(f'type: {token.type}\nvalue: {token.value}\n' +
-          f'line number: {token.lineno}\n' +
-          f'absolute pos: {token.lexpos}\n================')
+result = parser.parse(data)
+result.eval(variables)
