@@ -9,6 +9,6 @@ Linguagem de programacao sem objetos, com palavras chaves simplificadas e tipage
 * e: Equivalente ao "else", seguindo as mesmas regras do `i`
 * f: Define uma funcao, segundo o padrao `f <nome da funcao>(<argumentos>) { <corpo da funcao> }`, devido a tipagem fraca, nao é necessario definir o tipo do retorno. Para retornar um valor na funcao, basta definir o mesmo em uma variável com o mesmo nome da funcao, caso esta variavel nao seja definida, o valor padrao de retorno da funcao sera `None`
 * l: Definição de loop (`l <condicao de parada> { <corpo do loop> }`)
-* in: Para entrada de dados, deve ser diretamente associado a uma variavel, tal como `j = in`
-* out: Funcao para output de dados, recebe o dado em si como argumento, tal como `out('Olá Mundo!')`
+* in: Para entrada de dados, deve ser diretamente associado a uma variavel, tal como `j := in`
+* out: Funcao para output de dados, recebe o dado em si como argumento, tal como `out 42`
 
